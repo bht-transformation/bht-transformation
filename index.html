@@ -93,25 +93,13 @@
         }
 
         @keyframes drift1 {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(40px, -30px) scale(1.06);
-            }
-            66% {
-                transform: translate(-25px, 20px) scale(0.96);
-            }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -30px) scale(1.06); }
+            66% { transform: translate(-25px, 20px) scale(0.96); }
         }
         @keyframes drift2 {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-            50% {
-                transform: translate(-35px, 25px) scale(1.08);
-            }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-35px, 25px) scale(1.08); }
         }
 
         /* grid overlay */
@@ -260,15 +248,8 @@
             animation: pulse 2s ease-in-out infinite;
         }
         @keyframes pulse {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: scale(0.8);
-            }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
         }
 
         .hero h1 {
@@ -317,10 +298,7 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
         }
-        .hero-card-icon {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
+        .hero-card-icon { font-size: 1.5rem; margin-bottom: 8px; }
         .hero-card-label {
             font-size: 0.7rem;
             color: var(--bht-green-l);
@@ -329,10 +307,7 @@
             text-transform: uppercase;
             margin-bottom: 4px;
         }
-        .hero-card-text {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
+        .hero-card-text { font-size: 0.9rem; font-weight: 500; }
 
         .hero-scroll {
             position: absolute;
@@ -356,26 +331,13 @@
             animation: scrollAnim 2s ease-in-out infinite;
         }
         @keyframes scrollAnim {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scaleY(1);
-            }
-            50% {
-                opacity: 0.4;
-                transform: scaleY(0.5);
-            }
+            0%, 100% { opacity: 1; transform: scaleY(1); }
+            50% { opacity: 0.4; transform: scaleY(0.5); }
         }
 
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* ── SECTION BASE ── */
@@ -419,11 +381,7 @@
             margin-top: 60px;
             align-items: start;
         }
-        @media(max-width:768px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media(max-width:768px) { .about-grid { grid-template-columns: 1fr; } }
 
         .about-main {
             padding: 44px;
@@ -432,23 +390,10 @@
             backdrop-filter: blur(28px);
             border: 1px solid var(--border);
         }
-        .about-main h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            margin-bottom: 16px;
-        }
-        .about-main p {
-            color: var(--text-sub);
-            line-height: 1.8;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-        }
+        .about-main h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 16px; }
+        .about-main p { color: var(--text-sub); line-height: 1.8; margin-bottom: 12px; font-size: 0.95rem; }
 
-        .about-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        .about-stack { display: flex; flex-direction: column; gap: 20px; }
 
         .about-card {
             padding: 28px 32px;
@@ -463,34 +408,14 @@
         .about-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 2px;
             background: linear-gradient(90deg, var(--bht-green), var(--teal), transparent);
         }
-        .about-card:hover {
-            background: var(--glass-md);
-            transform: translateX(6px);
-        }
-        .about-card-num {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-        .about-card h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .about-card p {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            line-height: 1.6;
-        }
+        .about-card:hover { background: var(--glass-md); transform: translateX(6px); }
+        .about-card-num { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+        .about-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+        .about-card p { font-size: 0.85rem; color: var(--text-sub); line-height: 1.6; }
 
         /* ── PILLARS ── */
         .pillars-grid {
@@ -516,35 +441,20 @@
         }
         .pillar-glow {
             position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
+            top: -50px; right: -50px;
+            width: 150px; height: 150px;
             border-radius: 50%;
             filter: blur(40px);
             opacity: 0;
             background: radial-gradient(circle, var(--bht-green), transparent);
             transition: opacity 0.4s;
         }
-        .pillar:hover .pillar-glow {
-            opacity: 0.3;
-        }
-        .pillar-icon {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-        }
-        .pillar h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-        .pillar p {
-            font-size: 0.87rem;
-            color: var(--text-sub);
-            line-height: 1.7;
-        }
+        .pillar:hover .pillar-glow { opacity: 0.3; }
+        .pillar-icon { font-size: 2.2rem; margin-bottom: 20px; }
+        .pillar h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; }
+        .pillar p { font-size: 0.87rem; color: var(--text-sub); line-height: 1.7; }
 
-        /* ── STATS (More in Common) ── */
+        /* ── STATS ── */
         .stats-section {
             background: rgba(5, 18, 38, 0.5);
             padding: 100px 0;
@@ -553,11 +463,7 @@
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
         }
-        .stats-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .stats-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
         .stats-source {
             display: inline-flex;
@@ -591,16 +497,11 @@
             overflow: hidden;
             transition: all 0.3s;
         }
-        .stat-card:hover {
-            background: var(--glass-md);
-            transform: translateY(-6px);
-        }
+        .stat-card:hover { background: var(--glass-md); transform: translateY(-6px); }
         .stat-card::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 20%;
-            right: 20%;
+            bottom: 0; left: 20%; right: 20%;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--bht-green), transparent);
         }
@@ -615,19 +516,9 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            line-height: 1.5;
-            font-weight: 400;
-        }
-        .stat-context {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            margin-top: 10px;
-        }
+        .stat-label { font-size: 0.85rem; color: var(--text-sub); line-height: 1.5; font-weight: 400; }
+        .stat-context { font-size: 0.72rem; color: var(--text-muted); margin-top: 10px; }
 
-        /* quote bar */
         .quote-bar {
             margin-top: 60px;
             padding: 40px 48px;
@@ -636,7 +527,6 @@
             border: 1px solid var(--border);
             border-left: 4px solid var(--bht-green);
             backdrop-filter: blur(24px);
-            position: relative;
         }
         .quote-bar blockquote {
             font-family: 'Playfair Display', serif;
@@ -645,45 +535,23 @@
             line-height: 1.7;
             color: var(--text-sub);
         }
-        .quote-bar blockquote strong {
-            color: #fff;
-            font-style: normal;
-        }
-        .quote-source {
-            margin-top: 16px;
-            font-size: 0.78rem;
-            color: var(--bht-green-l);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
+        .quote-bar blockquote strong { color: #fff; font-style: normal; }
+        .quote-source { margin-top: 16px; font-size: 0.78rem; color: var(--bht-green-l); font-weight: 500; letter-spacing: 0.5px; }
 
         /* ── TIMELINE ── */
-        .timeline {
-            margin-top: 60px;
-            position: relative;
-        }
+        .timeline { margin-top: 60px; position: relative; }
         .timeline::before {
             content: '';
             position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
+            left: 20px; top: 0; bottom: 0;
             width: 2px;
             background: linear-gradient(var(--bht-green), var(--teal), transparent);
         }
-        .tl-item {
-            display: flex;
-            gap: 32px;
-            margin-bottom: 40px;
-            padding-left: 60px;
-            position: relative;
-        }
+        .tl-item { display: flex; gap: 32px; margin-bottom: 40px; padding-left: 60px; position: relative; }
         .tl-dot {
             position: absolute;
-            left: 11px;
-            top: 20px;
-            width: 20px;
-            height: 20px;
+            left: 11px; top: 20px;
+            width: 20px; height: 20px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--bht-green), var(--teal));
             border: 3px solid var(--navy);
@@ -699,28 +567,10 @@
             backdrop-filter: blur(20px);
             transition: all 0.3s;
         }
-        .tl-card:hover {
-            background: var(--glass-md);
-            transform: translateX(6px);
-        }
-        .tl-date {
-            font-size: 0.72rem;
-            color: var(--bht-green-l);
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-        .tl-card h4 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .tl-card p {
-            font-size: 0.87rem;
-            color: var(--text-sub);
-            line-height: 1.7;
-        }
+        .tl-card:hover { background: var(--glass-md); transform: translateX(6px); }
+        .tl-date { font-size: 0.72rem; color: var(--bht-green-l); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+        .tl-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
+        .tl-card p { font-size: 0.87rem; color: var(--text-sub); line-height: 1.7; }
 
         /* ── VOTING ── */
         .vote-section {
@@ -729,28 +579,12 @@
             max-width: 100%;
             border-top: 1px solid var(--border);
         }
-        .vote-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .vote-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 
-        .vote-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .vote-desc {
-            color: var(--text-sub);
-            line-height: 1.7;
-            max-width: 600px;
-            margin: 16px auto 0;
-        }
+        .vote-header { text-align: center; margin-bottom: 60px; }
+        .vote-desc { color: var(--text-sub); line-height: 1.7; max-width: 600px; margin: 16px auto 0; }
 
-        .poll-container {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
+        .poll-container { display: flex; flex-direction: column; gap: 32px; }
 
         .poll-card {
             padding: 40px 44px;
@@ -765,39 +599,20 @@
         .poll-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--bht-green), var(--teal));
         }
 
-        .poll-q-num {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-        .poll-q {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 400;
-            margin-bottom: 28px;
-            line-height: 1.5;
-        }
+        .poll-q-num { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+        .poll-q { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 400; margin-bottom: 28px; line-height: 1.5; }
 
         .poll-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
-        @media(max-width:600px) {
-            .poll-options {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media(max-width:600px) { .poll-options { grid-template-columns: 1fr; } }
 
         .poll-option {
             padding: 14px 20px;
@@ -820,18 +635,10 @@
             color: #fff;
             transform: translateX(4px);
         }
-        .poll-option.selected {
-            background: rgba(0, 155, 78, 0.2);
-            border-color: var(--bht-green);
-            color: #fff;
-        }
-        .poll-option.disabled {
-            cursor: default;
-            pointer-events: none;
-        }
+        .poll-option.selected { background: rgba(0, 155, 78, 0.2); border-color: var(--bht-green); color: #fff; }
+        .poll-option.disabled { cursor: default; pointer-events: none; }
         .poll-option-check {
-            width: 18px;
-            height: 18px;
+            width: 18px; height: 18px;
             border-radius: 50%;
             border: 2px solid var(--border);
             flex-shrink: 0;
@@ -841,34 +648,12 @@
             font-size: 10px;
             transition: all 0.25s;
         }
-        .poll-option.selected .poll-option-check {
-            background: var(--bht-green);
-            border-color: var(--bht-green);
-            color: #fff;
-        }
+        .poll-option.selected .poll-option-check { background: var(--bht-green); border-color: var(--bht-green); color: #fff; }
 
-        /* Result bars */
-        .result-bar-wrap {
-            margin-top: 10px;
-        }
-        .result-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-        .result-label {
-            font-size: 0.83rem;
-            color: var(--text-sub);
-            min-width: 180px;
-        }
-        .result-bar-bg {
-            flex: 1;
-            height: 10px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.08);
-            overflow: hidden;
-        }
+        .result-bar-wrap { margin-top: 10px; }
+        .result-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .result-label { font-size: 0.83rem; color: var(--text-sub); min-width: 180px; }
+        .result-bar-bg { flex: 1; height: 10px; border-radius: 50px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
         .result-bar-fill {
             height: 100%;
             border-radius: 50px;
@@ -877,21 +662,9 @@
             transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 0 10px rgba(0, 155, 78, 0.4);
         }
-        .result-pct {
-            font-size: 0.8rem;
-            color: var(--bht-green-l);
-            font-weight: 600;
-            min-width: 36px;
-            text-align: right;
-        }
+        .result-pct { font-size: 0.8rem; color: var(--bht-green-l); font-weight: 600; min-width: 36px; text-align: right; }
 
-        .vote-btn-row {
-            display: flex;
-            gap: 16px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+        .vote-btn-row { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
 
         .btn-primary {
             padding: 14px 36px;
@@ -907,15 +680,8 @@
             box-shadow: 0 6px 28px rgba(0, 155, 78, 0.4);
             transition: all 0.3s;
         }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 36px rgba(0, 155, 78, 0.55);
-        }
-        .btn-primary:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(0, 155, 78, 0.55); }
+        .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
         .btn-ghost {
             padding: 14px 28px;
@@ -929,18 +695,9 @@
             color: var(--text-sub);
             transition: all 0.3s;
         }
-        .btn-ghost:hover {
-            background: var(--glass-md);
-            color: #fff;
-        }
+        .btn-ghost:hover { background: var(--glass-md); color: #fff; }
 
-        .vote-notice {
-            margin-top: 16px;
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            text-align: center;
-            line-height: 1.6;
-        }
+        .vote-notice { margin-top: 16px; font-size: 0.78rem; color: var(--text-muted); text-align: center; line-height: 1.6; }
         .vote-success {
             display: none;
             text-align: center;
@@ -950,24 +707,11 @@
             border: 1px solid rgba(0, 155, 78, 0.3);
             margin-top: 20px;
         }
-        .vote-success.show {
-            display: block;
-            animation: fadeUp 0.5s ease;
-        }
-        .vote-success-icon {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
-        }
-        .vote-success h4 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-        .vote-success p {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-        }
+        .vote-success.show { display: block; animation: fadeUp 0.5s ease; }
+        .vote-success-icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .vote-success h4 { font-size: 1.1rem; margin-bottom: 8px; }
+        .vote-success p { font-size: 0.85rem; color: var(--text-sub); }
 
-        /* share panel */
         .share-panel {
             display: none;
             margin-top: 24px;
@@ -976,15 +720,8 @@
             background: var(--glass);
             border: 1px solid var(--border);
         }
-        .share-panel.show {
-            display: block;
-            animation: fadeUp 0.4s ease;
-        }
-        .share-panel h5 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
+        .share-panel.show { display: block; animation: fadeUp 0.4s ease; }
+        .share-panel h5 { font-size: 0.9rem; font-weight: 600; margin-bottom: 12px; }
         .share-code {
             font-family: monospace;
             font-size: 0.75rem;
@@ -997,13 +734,8 @@
             margin-bottom: 12px;
             border: 1px solid var(--border);
         }
-        .share-info {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
+        .share-info { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
 
-        /* voted already banner */
         .voted-banner {
             display: none;
             padding: 16px 24px;
@@ -1016,22 +748,10 @@
             font-size: 0.87rem;
             color: var(--text-sub);
         }
-        .voted-banner span {
-            color: var(--bht-green-l);
-            font-weight: 600;
-        }
+        .voted-banner span { color: var(--bht-green-l); font-weight: 600; }
 
-        /* total counter */
-        .vote-tally {
-            text-align: center;
-            margin-bottom: 32px;
-            font-size: 0.82rem;
-            color: var(--text-muted);
-        }
-        .vote-tally strong {
-            color: var(--bht-green-l);
-            font-size: 1rem;
-        }
+        .vote-tally { text-align: center; margin-bottom: 32px; font-size: 0.82rem; color: var(--text-muted); }
+        .vote-tally strong { color: var(--bht-green-l); font-size: 1rem; }
 
         /* ── FOOTER ── */
         footer {
@@ -1046,41 +766,12 @@
             gap: 48px;
             margin-bottom: 48px;
         }
-        @media(max-width:768px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        .footer-brand h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-        }
-        .footer-brand p {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            line-height: 1.7;
-            max-width: 320px;
-        }
-        .footer-links h5 {
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--bht-green-l);
-            margin-bottom: 16px;
-        }
-        .footer-links a {
-            display: block;
-            font-size: 0.87rem;
-            color: var(--text-sub);
-            text-decoration: none;
-            margin-bottom: 10px;
-            transition: color 0.2s;
-        }
-        .footer-links a:hover {
-            color: #fff;
-        }
+        @media(max-width:768px) { .footer-grid { grid-template-columns: 1fr; } }
+        .footer-brand h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 12px; }
+        .footer-brand p { font-size: 0.85rem; color: var(--text-sub); line-height: 1.7; max-width: 320px; }
+        .footer-links h5 { font-size: 0.78rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--bht-green-l); margin-bottom: 16px; }
+        .footer-links a { display: block; font-size: 0.87rem; color: var(--text-sub); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+        .footer-links a:hover { color: #fff; }
         .footer-bottom {
             display: flex;
             align-items: center;
@@ -1092,21 +783,8 @@
             font-size: 0.78rem;
             color: var(--text-muted);
         }
-        .footer-bht {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .footer-bht-badge {
-            padding: 6px 14px;
-            border-radius: 8px;
-            background: var(--glass);
-            border: 1px solid var(--border);
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            color: var(--text-sub);
-        }
+        .footer-bht { display: flex; align-items: center; gap: 10px; }
+        .footer-bht-badge { padding: 6px 14px; border-radius: 8px; background: var(--glass); border: 1px solid var(--border); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px; color: var(--text-sub); }
 
         /* ── SCROLL REVEAL ── */
         .reveal {
@@ -1114,19 +792,12 @@
             transform: translateY(40px);
             transition: opacity 0.7s ease, transform 0.7s ease;
         }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
         /* ── RESPONSIVE ── */
         @media(max-width:900px) {
-            nav {
-                padding: 14px 20px;
-            }
-            .nav-links {
-                display: none;
-            }
+            nav { padding: 14px 20px; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -1418,12 +1089,12 @@
                 <h2 class="section-title reveal">Deine Stimme zählt</h2>
                 <p class="vote-desc reveal">
                     Nimm an unserer Umfrage zu Demokratie an der BHT teil. Pro Gerät ist eine Abstimmung
-                    möglich. Die Ergebnisse werden live gespeichert und nach deiner Stimmabgabe öffentlich angezeigt.
+                    möglich. Die Ergebnisse werden live über Supabase gespeichert und nach deiner Stimmabgabe öffentlich angezeigt.
                 </p>
             </div>
 
             <div class="vote-tally reveal">
-                Bisherige Abstimmungen gesamt: <strong id="totalVotes">0</strong>
+                Bisherige Abstimmungen gesamt: <strong id="totalVotes">–</strong>
             </div>
 
             <div id="voted-notice" class="voted-banner" style="display:none;">
@@ -1569,8 +1240,7 @@
             <div class="vote-success" id="voteSuccess">
                 <div class="vote-success-icon">🗳️</div>
                 <h4>Danke für deine Stimme!</h4>
-                <p>Deine Antworten wurden live gespeichert. Die Ergebnisse sind unten sichtbar.
-                    Teile den Exportcode mit deinem Team, um Stimmen zusammenzuführen (Offline-Backup).</p>
+                <p>Deine Antworten wurden live in Supabase gespeichert. Die Ergebnisse sind unten sichtbar.</p>
             </div>
 
             <div class="share-panel" id="sharePanel">
@@ -1584,14 +1254,14 @@
                 margin-top:8px;"></textarea>
                 <br><button class="btn-ghost" style="margin-top:8px;" onclick="importVotes()">Ergebnisse zusammenführen</button>
                 <div class="share-info" style="margin-top:12px;">
-                    ⚠️ <strong>Hinweis:</strong> Die Ergebnisse werden primär live über Google Sheets gespeichert.
+                    ⚠️ <strong>Hinweis:</strong> Die Ergebnisse werden primär live über Supabase gespeichert.
                     Der Export-/Import-Code dient als Offline-Backup für den Fall, dass der Server nicht erreichbar ist.
                     Importierte Stimmen werden nur lokal gespeichert und nicht an den Server übertragen.
                 </div>
             </div>
 
             <p class="vote-notice">
-                🔒 Eine Stimme pro Browser/Gerät · Ergebnisse live über Google Sheets gespeichert ·
+                🔒 Eine Stimme pro Browser/Gerät · Ergebnisse live über Supabase gespeichert ·
                 Export-Code als Offline-Backup verfügbar
             </p>
         </div>
@@ -1631,15 +1301,38 @@
     </footer>
 
     <script>
-        // ── API URL (Google Apps Script Web-App) ──
-        const API_URL = "https://script.google.com/macros/s/AKfycbwI8QIs1sgdwUnT_XI1gBz2FAB4dPY10og-n0Q3XT2ZqGoWBNrPpMceor9C4eDznOVH/exec";
+        // ══════════════════════════════════════════════════════
+        // SUPABASE KONFIGURATION
+        // ══════════════════════════════════════════════════════
+        const SUPABASE_URL  = 'https://tjxvxajntptuhiufgolx.supabase.co';
+        const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqeHZ4YWpudHB0dWhpdWZnb2x4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwODU0MDIsImV4cCI6MjA5MzY2MTQwMn0.Wv0IzdiXUR3iX2t0cksmknfY7y0luGpwGRgfRXfP8fw';
 
-        // ── STORAGE KEYS ──
-        const VOTES_KEY = 'glasshouse_votes_v2';
-        const VOTED_KEY = 'glasshouse_voted_v2';
+        // REST-Hilfsfunktion für Supabase PostgREST
+        async function sbFetch(path, opts = {}) {
+            const url = `${SUPABASE_URL}/rest/v1/${path}`;
+            const headers = {
+                'apikey': SUPABASE_ANON,
+                'Authorization': `Bearer ${SUPABASE_ANON}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=representation',
+                ...opts.headers
+            };
+            const res = await fetch(url, { ...opts, headers });
+            if (!res.ok) {
+                const txt = await res.text();
+                throw new Error(`Supabase ${res.status}: ${txt}`);
+            }
+            const text = await res.text();
+            return text ? JSON.parse(text) : null;
+        }
+
+        // ══════════════════════════════════════════════════════
+        // LOKALER ZUSTAND
+        // ══════════════════════════════════════════════════════
+        const VOTED_KEY  = 'glasshouse_voted_v3';
+        const VOTES_KEY  = 'glasshouse_votes_v3';   // nur Offline-Fallback
         const SELECTIONS = { q1: null, q2: null, q3: null };
 
-        // ── DEFAULT VOTE STATE (für localStorage-Fallback) ──
         function defaultVotes() {
             return {
                 q1: { a: 0, b: 0, c: 0, d: 0 },
@@ -1649,97 +1342,99 @@
             };
         }
 
-        function loadVotes() {
-            try {
-                const s = localStorage.getItem(VOTES_KEY);
-                return s ? JSON.parse(s) : defaultVotes();
-            } catch (e) { return defaultVotes(); }
+        function loadLocalVotes() {
+            try { const s = localStorage.getItem(VOTES_KEY); return s ? JSON.parse(s) : defaultVotes(); }
+            catch (e) { return defaultVotes(); }
         }
-
-        function saveVotes(v) {
+        function saveLocalVotes(v) {
             try { localStorage.setItem(VOTES_KEY, JSON.stringify(v)); } catch (e) {}
         }
-
         function hasVoted() {
             try { return !!localStorage.getItem(VOTED_KEY); } catch (e) { return false; }
         }
-
         function markVoted() {
             try { localStorage.setItem(VOTED_KEY, '1'); } catch (e) {}
         }
 
-        // ── OPTION SELECTION ──
+        // ══════════════════════════════════════════════════════
+        // UI – OPTION AUSWÄHLEN
+        // ══════════════════════════════════════════════════════
         function selectOption(btn) {
             if (hasVoted()) return;
             const q = btn.dataset.q;
-            const a = btn.dataset.a;
-            SELECTIONS[q] = a;
+            SELECTIONS[q] = btn.dataset.a;
             document.querySelectorAll(`[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
             checkVoteReady();
         }
 
         function checkVoteReady() {
-            const ready = SELECTIONS.q1 && SELECTIONS.q2 && SELECTIONS.q3;
-            document.getElementById('voteBtn').disabled = !ready;
+            document.getElementById('voteBtn').disabled =
+                !(SELECTIONS.q1 && SELECTIONS.q2 && SELECTIONS.q3);
         }
 
-        // ── SUBMIT VOTE (NEU: async mit Google Sheets API) ──
+        // ══════════════════════════════════════════════════════
+        // ABSTIMMEN – SUPABASE INSERT via RPC oder direktes INSERT
+        // ══════════════════════════════════════════════════════
+        /*
+         * Erwartet eine Tabelle `votes` in Supabase mit folgendem Schema:
+         *
+         *   create table public.votes (
+         *     id         bigserial primary key,
+         *     q1         text not null check (q1 in ('a','b','c','d')),
+         *     q2         text not null check (q2 in ('a','b','c','d')),
+         *     q3         text not null check (q3 in ('a','b','c','d')),
+         *     created_at timestamptz default now()
+         *   );
+         *
+         *   -- RLS: INSERT für anon erlauben
+         *   alter table public.votes enable row level security;
+         *   create policy "anon insert" on public.votes for insert to anon with check (true);
+         *   create policy "anon select" on public.votes for select to anon using (true);
+         */
         async function submitVote() {
-            if (hasVoted()) {
-                showResults();
-                return;
-            }
-
+            if (hasVoted()) { showResults(); return; }
             if (!SELECTIONS.q1 || !SELECTIONS.q2 || !SELECTIONS.q3) {
                 alert('Bitte alle drei Fragen beantworten.');
                 return;
             }
 
-            // Button während des Requests deaktivieren
-            const voteBtn = document.getElementById('voteBtn');
-            voteBtn.disabled = true;
-            voteBtn.textContent = 'Wird gesendet…';
+            const btn = document.getElementById('voteBtn');
+            btn.disabled = true;
+            btn.textContent = 'Wird gesendet…';
 
             try {
-                const res = await fetch(API_URL, {
-                    method: "POST",
-                    body: JSON.stringify(SELECTIONS),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
+                await sbFetch('votes', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        q1: SELECTIONS.q1,
+                        q2: SELECTIONS.q2,
+                        q3: SELECTIONS.q3
+                    })
                 });
 
-                const result = await res.json();
-
-                if (result.status === "success") {
-                    markVoted();
-                    document.getElementById('voteSuccess').classList.add('show');
-                    disableOptions();
-                    await loadResultsFromServer();
-                } else {
-                    // Server antwortete, aber nicht mit success → Fallback
-                    throw new Error('Server antwortete mit unerwartetem Status');
-                }
+                markVoted();
+                document.getElementById('voteSuccess').classList.add('show');
+                disableOptions();
+                await loadResultsFromSupabase();
 
             } catch (err) {
-                console.warn('API nicht erreichbar – fallback zu localStorage:', err);
-                // Fallback: Lokale Speicherung
-                const votes = loadVotes();
+                console.warn('Supabase nicht erreichbar – lokaler Fallback:', err);
+                const votes = loadLocalVotes();
                 votes.q1[SELECTIONS.q1]++;
                 votes.q2[SELECTIONS.q2]++;
                 votes.q3[SELECTIONS.q3]++;
                 votes.total = (votes.total || 0) + 1;
-                saveVotes(votes);
+                saveLocalVotes(votes);
                 markVoted();
                 document.getElementById('voteSuccess').classList.add('show');
                 disableOptions();
-                showResultsLocal();
-                updateTallyLocal();
-                alert('ℹ️ Die Stimme wurde lokal gespeichert (Server gerade nicht erreichbar).');
+                renderResults(votes);
+                document.getElementById('totalVotes').textContent = votes.total;
+                alert('ℹ️ Stimme lokal gespeichert – Supabase gerade nicht erreichbar.');
             }
 
-            voteBtn.textContent = 'Jetzt abstimmen';
+            btn.textContent = 'Jetzt abstimmen';
         }
 
         function disableOptions() {
@@ -1748,72 +1443,72 @@
             document.getElementById('voteBtn').disabled = true;
         }
 
-        // ── LOAD RESULTS FROM SERVER (NEU) ──
-        async function loadResultsFromServer() {
+        // ══════════════════════════════════════════════════════
+        // ERGEBNISSE VON SUPABASE LADEN
+        // ══════════════════════════════════════════════════════
+        async function loadResultsFromSupabase() {
             try {
-                const res = await fetch(API_URL);
-                const votes = await res.json();
+                // Alle Stimmen holen
+                const rows = await sbFetch('votes?select=q1,q2,q3', { method: 'GET' });
 
-                ['q1', 'q2', 'q3'].forEach(q => {
-                    const container = document.getElementById('res-' + q);
-                    if (container) container.style.display = 'block';
+                if (!rows || rows.length === 0) {
+                    document.getElementById('totalVotes').textContent = '0';
+                    return;
+                }
 
-                    const total = Object.values(votes[q]).reduce((s, v) => s + v, 0) || 1;
+                // Aggregation im Browser
+                const agg = defaultVotes();
+                agg.total = rows.length;
 
-                    ['a', 'b', 'c', 'd'].forEach(a => {
-                        const pct = Math.round((votes[q][a] / total) * 100);
-                        const bar = document.getElementById('bar-' + q + '-' + a);
-                        const pctEl = document.getElementById('pct-' + q + '-' + a);
-
-                        if (bar) {
-                            setTimeout(() => { bar.style.width = pct + '%'; }, 100);
-                        }
-                        if (pctEl) {
-                            pctEl.textContent = pct + '%';
-                        }
-                    });
+                rows.forEach(row => {
+                    if (agg.q1[row.q1] !== undefined) agg.q1[row.q1]++;
+                    if (agg.q2[row.q2] !== undefined) agg.q2[row.q2]++;
+                    if (agg.q3[row.q3] !== undefined) agg.q3[row.q3]++;
                 });
 
-                document.getElementById('totalVotes').textContent = votes.total || 0;
+                renderResults(agg);
+                document.getElementById('totalVotes').textContent = agg.total;
 
             } catch (err) {
-                console.warn('Ergebnisse konnten nicht vom Server geladen werden – zeige lokale Daten:', err);
-                showResultsLocal();
-                updateTallyLocal();
+                console.warn('Supabase-Ergebnisse nicht ladbar:', err);
+                // Lokalen Fallback anzeigen
+                const local = loadLocalVotes();
+                renderResults(local);
+                document.getElementById('totalVotes').textContent = local.total || 0;
             }
         }
 
-        // ── SHOW RESULTS (lokal, als Fallback) ──
-        function showResultsLocal() {
-            const votes = loadVotes();
+        // ══════════════════════════════════════════════════════
+        // ERGEBNISSE RENDERN
+        // ══════════════════════════════════════════════════════
+        function renderResults(votes) {
             ['q1', 'q2', 'q3'].forEach(q => {
-                document.getElementById('res-' + q).style.display = 'block';
+                const container = document.getElementById('res-' + q);
+                if (container) container.style.display = 'block';
+
                 const total = Object.values(votes[q]).reduce((s, v) => s + v, 0) || 1;
+
                 ['a', 'b', 'c', 'd'].forEach(a => {
-                    const pct = Math.round((votes[q][a] / total) * 100);
-                    const bar = document.getElementById('bar-' + q + '-' + a);
+                    const pct  = Math.round(((votes[q][a] || 0) / total) * 100);
+                    const bar  = document.getElementById('bar-' + q + '-' + a);
                     const pctEl = document.getElementById('pct-' + q + '-' + a);
-                    setTimeout(() => { if (bar) bar.style.width = pct + '%'; }, 100);
+                    if (bar)   setTimeout(() => { bar.style.width = pct + '%'; }, 100);
                     if (pctEl) pctEl.textContent = pct + '%';
                 });
             });
         }
 
-        function updateTallyLocal() {
-            const v = loadVotes();
-            document.getElementById('totalVotes').textContent = v.total || 0;
-        }
-
-        // ── Öffentliche showResults (wird von hasVoted()-Fällen und toggle genutzt) ──
+        // ══════════════════════════════════════════════════════
+        // ÖFFENTLICHE FUNKTIONEN
+        // ══════════════════════════════════════════════════════
         function showResults() {
-            // Primär vom Server laden
-            loadResultsFromServer();
+            loadResultsFromSupabase();
         }
 
         function toggleResults() {
             const r1 = document.getElementById('res-q1');
-            if (r1.style.display === 'none' || r1.style.display === '') {
-                loadResultsFromServer();
+            if (!r1.style.display || r1.style.display === 'none') {
+                loadResultsFromSupabase();
             } else {
                 ['q1', 'q2', 'q3'].forEach(q => {
                     document.getElementById('res-' + q).style.display = 'none';
@@ -1821,26 +1516,26 @@
             }
         }
 
-        // ── EXPORT / IMPORT (nur localStorage, als Offline-Backup) ──
+        // ── EXPORT / IMPORT (Offline-Backup, nur lokal) ──
         function exportVotes() {
-            const votes = loadVotes();
+            // Für Export nehmen wir die lokal gecachten Daten oder zeigen Hinweis
+            const votes = loadLocalVotes();
             const code = btoa(JSON.stringify(votes));
             document.getElementById('shareCode').textContent = code;
-            const panel = document.getElementById('sharePanel');
-            panel.classList.toggle('show');
+            document.getElementById('sharePanel').classList.toggle('show');
         }
 
         function copyCode() {
             const code = document.getElementById('shareCode').textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                alert('Code in Zwischenablage kopiert!');
-            }).catch(() => {
-                const el = document.getElementById('shareCode');
-                const range = document.createRange();
-                range.selectNode(el);
-                window.getSelection().removeAllRanges();
-                window.getSelection().addRange(range);
-            });
+            navigator.clipboard.writeText(code)
+                .then(() => alert('Code in Zwischenablage kopiert!'))
+                .catch(() => {
+                    const el = document.getElementById('shareCode');
+                    const range = document.createRange();
+                    range.selectNode(el);
+                    window.getSelection().removeAllRanges();
+                    window.getSelection().addRange(range);
+                });
         }
 
         function importVotes() {
@@ -1848,30 +1543,31 @@
             if (!raw) { alert('Bitte Code einfügen.'); return; }
             try {
                 const imported = JSON.parse(atob(raw));
-                const current = loadVotes();
-                const merged = defaultVotes();
+                const current  = loadLocalVotes();
+                const merged   = defaultVotes();
                 ['q1', 'q2', 'q3'].forEach(q => {
                     ['a', 'b', 'c', 'd'].forEach(a => {
                         merged[q][a] = (current[q][a] || 0) + (imported[q][a] || 0);
                     });
                 });
                 merged.total = (current.total || 0) + (imported.total || 0);
-                saveVotes(merged);
-                updateTallyLocal();
-                showResultsLocal();
-                alert('✅ Ergebnisse erfolgreich zusammengeführt! ' + (imported.total || '?') +
-                    ' weitere Stimmen importiert (nur lokal).');
+                saveLocalVotes(merged);
+                renderResults(merged);
+                document.getElementById('totalVotes').textContent = merged.total;
+                alert('✅ ' + (imported.total || '?') + ' weitere Stimmen lokal zusammengeführt.');
                 document.getElementById('importCode').value = '';
             } catch (e) {
                 alert('Ungültiger Code. Bitte den vollständigen Exportcode einfügen.');
             }
         }
 
-        // ── STAT COUNTER ANIMATION ──
+        // ══════════════════════════════════════════════════════
+        // STAT-COUNTER ANIMATION
+        // ══════════════════════════════════════════════════════
         function animateCounter(el) {
             const target = parseInt(el.dataset.target, 10);
             let current = 0;
-            const step = Math.ceil(target / 60);
+            const step  = Math.ceil(target / 60);
             const timer = setInterval(() => {
                 current = Math.min(current + step, target);
                 el.textContent = current;
@@ -1879,7 +1575,9 @@
             }, 25);
         }
 
-        // ── SCROLL REVEAL ──
+        // ══════════════════════════════════════════════════════
+        // SCROLL REVEAL
+        // ══════════════════════════════════════════════════════
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
@@ -1894,27 +1592,22 @@
             });
         }, { threshold: 0.15 });
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            revealObserver.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el  => revealObserver.observe(el));
+        document.querySelectorAll('.stat-card').forEach(c => revealObserver.observe(c));
 
-        document.querySelectorAll('.stat-card').forEach(card => {
-            revealObserver.observe(card);
-        });
-
-        // ── INIT ──
-        (function init() {
+        // ══════════════════════════════════════════════════════
+        // INIT
+        // ══════════════════════════════════════════════════════
+        (async function init() {
             document.getElementById('voteBtn').disabled = true;
-            updateTallyLocal();
+
+            // Immer Live-Daten von Supabase laden
+            await loadResultsFromSupabase();
 
             if (hasVoted()) {
                 disableOptions();
-                showResults();
-                document.getElementById('voted-notice').style.display = 'flex';
+                // Ergebnisse werden bereits oben geladen & gerendert
             }
-
-            // Immer live Ergebnisse vom Server laden (auch ohne eigene Stimmabgabe)
-            loadResultsFromServer();
         })();
     </script>
 </body>
