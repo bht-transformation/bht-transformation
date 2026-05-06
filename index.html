@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demokratie am Arbeitsplatz – Team Glasshouse</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #0a1f44, #003366);
+        color: white;
+    }
+
+    h1, h2, h3 {
+        font-weight: 600;
+    }
+
+    .container {
+        padding: 40px;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .glass {
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(16px);
+        border-radius: 20px;
+        padding: 25px;
+        margin-bottom: 25px;
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    .button {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        padding: 12px 20px;
+        margin: 5px;
+        border-radius: 12px;
+        cursor: pointer;
+        color: white;
+        transition: 0.3s;
+    }
+
+    .button:hover {
+        background: rgba(255,255,255,0.4);
+    }
+
+    .progress {
+        height: 12px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 10px;
+        margin-top: 5px;
+        overflow: hidden;
+    }
+
+    .bar {
+        height: 100%;
+        background: #00aaff;
+        width: 0%;
+        transition: width 0.5s;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 50px;
+        opacity: 0.7;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="glass">
+        <h1>Demokratie am Arbeitsplatz</h1>
+        <p>
+            Demokratie endet nicht bei Wahlen – sie beginnt im Alltag. 
+            Gerade im Arbeitskontext bedeutet sie Mitbestimmung, Transparenz 
+            und kollektive Entscheidungsprozesse.
+        </p>
+    </div>
+
+    <div class="glass">
+        <h2>Warum ist das wichtig?</h2>
+        <p>
+            Studien zeigen: Die Mehrheit der Menschen in Deutschland unterstützt demokratische Werte, 
+            ist aber oft unzufrieden mit deren Umsetzung im Alltag. :contentReference[oaicite:2]{index=2}  
+        </p>
+        <p>
+            Forschung von More in Common zeigt zudem, dass demokratische Werte wie 
+            <strong>Gerechtigkeit, Sicherheit und Beteiligung</strong> zentrale Erwartungen sind. :contentReference[oaicite:3]{index=3}
+        </p>
+    </div>
+
+    <div class="glass">
+        <h2>Einblick: More in Common Studie</h2>
+        <ul>
+            <li>83% mögen Deutschland als Gesellschaft</li>
+            <li>72% fühlen sich verbunden mit dem Land</li>
+            <li>Großes Bedürfnis nach Zusammenhalt und Mitbestimmung</li>
+        </ul>
+        <p>
+            Gleichzeitig zeigt sich: Viele Menschen wünschen sich mehr Beteiligung im Alltag – 
+            auch am Arbeitsplatz. :contentReference[oaicite:4]{index=4}
+        </p>
+    </div>
+
+    <div class="glass">
+        <h2>Projektmodul II – Team Glasshouse</h2>
+        <p>
+            Wir sind <strong>Team Glasshouse</strong> aus dem Studiengang 
+            <em>Transformation Design & Print</em>.
+        </p>
+        <p>
+            Unser Projekt untersucht, wie demokratische Prinzipien 
+            durch Gestaltung sichtbar und erlebbar gemacht werden können.
+        </p>
+        <p>
+            Fokus: Interfaces, Visualisierung und Partizipation.
+        </p>
+    </div>
+
+    <div class="glass">
+        <h2>Live Abstimmung</h2>
+        <p><strong>Sollten Mitarbeitende mehr Mitspracherecht im Unternehmen haben?</strong></p>
+
+        <button class="button" onclick="vote('yes')">Ja</button>
+        <button class="button" onclick="vote('no')">Nein</button>
+
+        <h3>Ergebnis</h3>
+        <div>Ja: <span id="yesCount">0</span></div>
+        <div class="progress"><div id="yesBar" class="bar"></div></div>
+
+        <div>Nein: <span id="noCount">0</span></div>
+        <div class="progress"><div id="noBar" class="bar"></div></div>
+    </div>
+
+    <footer>
+        Team Glasshouse – Transformation Design & Print
+    </footer>
+
+</div>
+
+<script>
+    const STORAGE_KEY = "glasshouse_votes";
+    const USER_KEY = "glasshouse_voted";
+
+    function getVotes() {
+        let data = localStorage.getItem(STORAGE_KEY);
+        return data ? JSON.parse(data) : { yes: 0, no: 0 };
+    }
+
+    function saveVotes(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function vote(option) {
+        if (localStorage.getItem(USER_KEY)) {
+            alert("Du hast bereits abgestimmt.");
+            return;
+        }
+
+        let votes = getVotes();
+        votes[option]++;
+        saveVotes(votes);
+
+        localStorage.setItem(USER_KEY, true);
+
+        render();
+    }
+
+    function render() {
+        let votes = getVotes();
+        let total = votes.yes + votes.no;
+
+        document.getElementById("yesCount").innerText = votes.yes;
+        document.getElementById("noCount").innerText = votes.no;
+
+        let yesPercent = total ? (votes.yes / total) * 100 : 0;
+        let noPercent = total ? (votes.no / total) * 100 : 0;
+
+        document.getElementById("yesBar").style.width = yesPercent + "%";
+        document.getElementById("noBar").style.width = noPercent + "%";
+    }
+
+    render();
+</script>
+
+</body>
+</html>
