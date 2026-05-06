@@ -1066,8 +1066,7 @@ footer {
 const VOTES_KEY   = 'glasshouse_votes_v2';
 const VOTED_KEY   = 'glasshouse_voted_v2';
 const SELECTIONS  = { q1: null, q2: null, q3: null };
-const API_URL = "https://script.google.com/macros/s/AKfycbwI8QIs1sgdwUnT_XI1gBz2FAB4dPY10og-n0Q3XT2ZqGoWBNrPpMceor9C4eDznOVH/exec";
-  
+
 // ── DEFAULT VOTE STATE ──
 function defaultVotes() {
   return {
@@ -1114,70 +1113,11 @@ function checkVoteReady() {
 }
 
 // ── SUBMIT ──
-async function submitVote() {
-  if (hasVoted()) {
-    showResults();
-    return;
+function submitVote() {
+  if(hasVoted()) { showResults(); return; }
+  if(!SELECTIONS.q1 || !SELECTIONS.q2 || !SELECTIONS.q3) {
+    alert('Bitte alle drei Fragen beantworten.'); return;
   }
-
-  if (!SELECTIONS.q1 || !SELECTIONS.q2 || !SELECTIONS.q3) {
-    alert('Bitte alle drei Fragen beantworten.');
-    return;
-  }
-
-  try {
-    const res = await fetch(API_URL, {
-      method: "POST",
-      body: JSON.stringify(SELECTIONS),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
-    const result = await res.json();
-
-    if (result.status === "success") {
-      markVoted();
-      document.getElementById('voteSuccess').classList.add('show');
-      disableOptions();
-      await loadResultsFromServer();
-    } else {
-      alert("Fehler beim Speichern.");
-    }
-
-  } catch (err) {
-    console.error(err);
-    alert("Verbindungsfehler – bitte später erneut versuchen.");
-  }
-}
-  async function loadResultsFromServer() {
-  try {
-    const res = await fetch(API_URL);
-    const votes = await res.json();
-
-    ['q1','q2','q3'].forEach(q => {
-      document.getElementById('res-'+q).style.display = 'block';
-
-      const total = Object.values(votes[q]).reduce((s,v)=>s+v,0) || 1;
-
-      ['a','b','c','d'].forEach(a => {
-        const pct = Math.round((votes[q][a]/total)*100);
-
-        const bar = document.getElementById('bar-'+q+'-'+a);
-        const pctEl = document.getElementById('pct-'+q+'-'+a);
-
-        bar.style.width = pct + '%';
-        pctEl.textContent = pct + '%';
-      });
-    });
-
-    document.getElementById('totalVotes').textContent = votes.total;
-
-  } catch (err) {
-    console.error("Fehler beim Laden der Ergebnisse:", err);
-  }
-}
-  
   const votes = loadVotes();
   votes.q1[SELECTIONS.q1]++;
   votes.q2[SELECTIONS.q2]++;
@@ -1316,15 +1256,11 @@ document.querySelectorAll('.stat-card').forEach(card=>{
 (function init(){
   document.getElementById('voteBtn').disabled = true;
   updateTally();
-
   if(hasVoted()) {
     disableOptions();
     showResults();
     document.getElementById('voted-notice').style.display = 'flex';
   }
-
-  // NEU:
-  loadResultsFromServer();
 })();
 </script>
 </body>
