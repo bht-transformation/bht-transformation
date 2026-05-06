@@ -6,7 +6,7 @@
     <title>Demokratie am Arbeitsplatz – Team Glasshouse | BHT Berlin</title>
     <link rel="icon" type="image/ico" href="https://www.bht-berlin.de/favicon.ico">
 
-    <!-- Supabase JS SDK -->
+    <!-- Supabase JS SDK (nur verwenden, wenn geladen) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js">
     </script>
 
@@ -1557,8 +1557,7 @@
                 <div class="share-code" id="shareCode"></div>
                 <button class="btn-ghost" style="margin-bottom:12px;" onclick="copyCode()">Code kopieren</button><br>
                 <h5 style="margin-top:16px;">📥 Fremde Ergebnisse importieren (Offline-Backup)</h5>
-                <textarea id="importCode" placeholder="Exportcode hier einfügen…"
-                style="width:100%;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:8px;
+                <textarea id="importCode" placeholder="Exportcode hier einfügen…" style="width:100%;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:8px;
                 padding:12px;color:#fff;font-family:monospace;font-size:0.75rem;resize:vertical;min-height:60px;
                 margin-top:8px;"></textarea>
                 <br><button class="btn-ghost" style="margin-top:8px;" onclick="importVotes()">Ergebnisse zusammenführen</button>
@@ -1610,41 +1609,17 @@
 
     <script>
         // ═══════════════════════════════════════════
-        //  SUPABASE KONFIGURATION
+        //  SUPABASE – NUR VERWENDEN, WENN GELADEN
         // ═══════════════════════════════════════════
         const SUPABASE_URL = "https://tjxvxajntptuhiufgolx.supabase.co";
-        const SUPABASE_ANON_KEY =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqeHZ4YWpudHB0dWhpdWZnb2x4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwODU0MDIsImV4cCI6MjA5MzY2MTQwMn0.Wv0IzdiXUR3iX2t0cksmknfY7y0luGpwGRgfRXfP8fw";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqeHZ4YWpudHB0dWhpdWZnb2x4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwODU0MDIsImV4cCI6MjA5MzY2MTQwMn0.Wv0IzdiXUR3iX2t0cksmknfY7y0luGpwGRgfRXfP8fw";
 
-        // Supabase-Client initialisieren
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // ═══════════════════════════════════════════
-        //  TABELLEN-SCHEMA (in Supabase SQL Editor ausführen):
-        // ═══════════════════════════════════════════
-        /*
-          CREATE TABLE IF NOT EXISTS votes (
-            id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-            question TEXT NOT NULL,
-            option TEXT NOT NULL,
-            session_id TEXT NOT NULL,
-            created_at TIMESTAMPTZ DEFAULT NOW(),
-            UNIQUE(question, session_id)
-          );
-
-          -- Row Level Security aktivieren
-          ALTER TABLE votes ENABLE ROW LEVEL SECURITY;
-
-          -- Öffentlichen Lese-Zugriff erlauben
-          CREATE POLICY "Allow public select" ON votes
-            FOR SELECT TO anon
-            USING (true);
-
-          -- Öffentlichen Schreib-Zugriff erlauben
-          CREATE POLICY "Allow public insert" ON votes
-            FOR INSERT TO anon
-            WITH CHECK (true);
-        */
+        let supabase = null;
+        if (window.supabase && typeof window.supabase.createClient === 'function') {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        } else {
+            console.warn('Supabase SDK nicht verfügbar – es wird nur der lokale Speicher genutzt.');
+        }
 
         // ═══════════════════════════════════════════
         //  STORAGE KEYS & STATE
@@ -1654,11 +1629,10 @@
         const SESSION_KEY = 'glasshouse_session_id';
         const SELECTIONS = { q1: null, q2: null, q3: null };
 
-        // Eindeutige Session-ID (im localStorage gespeichert)
         function getSessionId() {
             let sid = localStorage.getItem(SESSION_KEY);
             if (!sid) {
-                sid = 'sid_' + crypto.randomUUID();
+                sid = 'sid_' + (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random());
                 localStorage.setItem(SESSION_KEY, sid);
             }
             return sid;
@@ -1711,7 +1685,7 @@
         }
 
         // ═══════════════════════════════════════════
-        //  ABSTIMMUNG EINREICHEN (Supabase)
+        //  ABSTIMMUNG EINREICHEN (Supabase / Fallback)
         // ═══════════════════════════════════════════
         async function submitVote() {
             if (hasVoted()) {
@@ -1728,52 +1702,50 @@
             voteBtn.disabled = true;
             voteBtn.textContent = 'Wird gesendet…';
 
-            const sessionId = getSessionId();
-            const inserts = [
-                { question: 'q1', option: SELECTIONS.q1, session_id: sessionId },
-                { question: 'q2', option: SELECTIONS.q2, session_id: sessionId },
-                { question: 'q3', option: SELECTIONS.q3, session_id: sessionId },
-            ];
-
-            try {
-                const { error } = await supabase
-                    .from('votes')
-                    .insert(inserts);
-
-                if (error) {
-                    // Unique-Verletzung (23505) = bereits abgestimmt
-                    if (error.code === '23505') {
-                        markVoted();
-                        disableOptions();
-                        await loadResultsFromServer();
-                        document.getElementById('voted-notice').style.display = 'flex';
-                        voteBtn.textContent = 'Jetzt abstimmen';
-                        return;
+            // Erst versuchen, in Supabase zu schreiben, falls verfügbar
+            let serverSuccess = false;
+            if (supabase) {
+                try {
+                    const sessionId = getSessionId();
+                    const inserts = [
+                        { question: 'q1', option: SELECTIONS.q1, session_id: sessionId },
+                        { question: 'q2', option: SELECTIONS.q2, session_id: sessionId },
+                        { question: 'q3', option: SELECTIONS.q3, session_id: sessionId },
+                    ];
+                    const { error } = await supabase.from('votes').insert(inserts);
+                    if (!error || error.code === '23505') {
+                        serverSuccess = true;
+                        if (error && error.code === '23505') {
+                            // Wurde bereits abgestimmt, aber wir behandeln es als Erfolg
+                        }
+                    } else {
+                        console.warn('Supabase-Insert-Fehler:', error);
                     }
-                    throw error;
+                } catch (err) {
+                    console.warn('Supabase nicht erreichbar:', err);
                 }
+            }
 
-                // Erfolg
-                markVoted();
-                document.getElementById('voteSuccess').classList.add('show');
-                disableOptions();
+            // Fallback: Lokale Speicherung
+            const votes = loadVotes();
+            votes.q1[SELECTIONS.q1]++;
+            votes.q2[SELECTIONS.q2]++;
+            votes.q3[SELECTIONS.q3]++;
+            votes.total = (votes.total || 0) + 1;
+            saveVotes(votes);
+
+            markVoted();
+            document.getElementById('voteSuccess').classList.add('show');
+            disableOptions();
+
+            if (serverSuccess && supabase) {
                 await loadResultsFromServer();
-
-            } catch (err) {
-                console.warn('Supabase nicht erreichbar – fallback zu localStorage:', err);
-                // Fallback: Lokale Speicherung
-                const votes = loadVotes();
-                votes.q1[SELECTIONS.q1]++;
-                votes.q2[SELECTIONS.q2]++;
-                votes.q3[SELECTIONS.q3]++;
-                votes.total = (votes.total || 0) + 1;
-                saveVotes(votes);
-                markVoted();
-                document.getElementById('voteSuccess').classList.add('show');
-                disableOptions();
+            } else {
                 showResultsLocal();
                 updateTallyLocal();
-                alert('ℹ️ Die Stimme wurde lokal gespeichert (Server gerade nicht erreichbar).');
+                if (!supabase) {
+                    alert('ℹ️ Die Stimme wurde lokal gespeichert (Supabase nicht verfügbar).');
+                }
             }
 
             voteBtn.textContent = 'Jetzt abstimmen';
@@ -1786,9 +1758,14 @@
         }
 
         // ═══════════════════════════════════════════
-        //  ERGEBNISSE VOM SERVER LADEN (Supabase)
+        //  ERGEBNISSE VOM SERVER (Supabase)
         // ═══════════════════════════════════════════
         async function loadResultsFromServer() {
+            if (!supabase) {
+                showResultsLocal();
+                updateTallyLocal();
+                return;
+            }
             try {
                 const { data, error } = await supabase
                     .from('votes')
@@ -1796,7 +1773,6 @@
 
                 if (error) throw error;
 
-                // Clientseitige Aggregation
                 const votes = {
                     q1: { a: 0, b: 0, c: 0, d: 0 },
                     q2: { a: 0, b: 0, c: 0, d: 0 },
@@ -1813,7 +1789,6 @@
                 });
                 votes.total = voterSessions.size;
 
-                // UI aktualisieren
                 updateResultBars(votes);
                 document.getElementById('totalVotes').textContent = votes.total;
 
@@ -1846,9 +1821,6 @@
             });
         }
 
-        // ═══════════════════════════════════════════
-        //  LOKALE ERGEBNISSE (Fallback)
-        // ═══════════════════════════════════════════
         function showResultsLocal() {
             const votes = loadVotes();
             updateResultBars(votes);
@@ -1937,7 +1909,7 @@
         }
 
         // ═══════════════════════════════════════════
-        //  SCROLL REVEAL
+        //  SCROLL REVEAL (immer aktiv)
         // ═══════════════════════════════════════════
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(e => {
@@ -1967,7 +1939,7 @@
         (function init() {
             document.getElementById('voteBtn').disabled = true;
 
-            // Session-ID generieren (für Supabase)
+            // Session-ID generieren
             getSessionId();
 
             updateTallyLocal();
@@ -1977,9 +1949,10 @@
                 document.getElementById('voted-notice').style.display = 'flex';
             }
 
-            // Live-Ergebnisse vom Server laden
+            // Ergebnisse vom Server oder lokal laden
             loadResultsFromServer();
         })();
     </script>
+
 </body>
 </html>
