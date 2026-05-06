@@ -6,13 +6,16 @@
     <title>Demokratie am Arbeitsplatz – Team Glasshouse | BHT Berlin</title>
     <link rel="icon" type="image/ico" href="https://www.bht-berlin.de/favicon.ico">
 
+    <!-- Google Fonts (korrigiert, robuster) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Supabase JS SDK (nur verwenden, wenn geladen) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js">
     </script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@200;300;400;500;600;700&display=swap');
-
         :root {
             --navy: #0A1F38;
             --navy-mid: #112952;
@@ -1608,22 +1611,16 @@
     </footer>
 
     <script>
-        // ═══════════════════════════════════════════
-        //  SUPABASE – NUR VERWENDEN, WENN GELADEN
-        // ═══════════════════════════════════════════
+        // Supabase nur initialisieren, wenn die Bibliothek geladen wurde
         const SUPABASE_URL = "https://tjxvxajntptuhiufgolx.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqeHZ4YWpudHB0dWhpdWZnb2x4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwODU0MDIsImV4cCI6MjA5MzY2MTQwMn0.Wv0IzdiXUR3iX2t0cksmknfY7y0luGpwGRgfRXfP8fw";
 
         let supabase = null;
         if (window.supabase && typeof window.supabase.createClient === 'function') {
             supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        } else {
-            console.warn('Supabase SDK nicht verfügbar – es wird nur der lokale Speicher genutzt.');
         }
 
-        // ═══════════════════════════════════════════
-        //  STORAGE KEYS & STATE
-        // ═══════════════════════════════════════════
+        // Storage Keys
         const VOTES_KEY = 'glasshouse_votes_v2';
         const VOTED_KEY = 'glasshouse_voted_v3';
         const SESSION_KEY = 'glasshouse_session_id';
@@ -1666,9 +1663,6 @@
             try { localStorage.setItem(VOTED_KEY, '1'); } catch (e) {}
         }
 
-        // ═══════════════════════════════════════════
-        //  OPTION AUSWÄHLEN
-        // ═══════════════════════════════════════════
         function selectOption(btn) {
             if (hasVoted()) return;
             const q = btn.dataset.q;
@@ -1684,9 +1678,6 @@
             document.getElementById('voteBtn').disabled = !ready;
         }
 
-        // ═══════════════════════════════════════════
-        //  ABSTIMMUNG EINREICHEN (Supabase / Fallback)
-        // ═══════════════════════════════════════════
         async function submitVote() {
             if (hasVoted()) {
                 showResults();
@@ -1702,7 +1693,6 @@
             voteBtn.disabled = true;
             voteBtn.textContent = 'Wird gesendet…';
 
-            // Erst versuchen, in Supabase zu schreiben, falls verfügbar
             let serverSuccess = false;
             if (supabase) {
                 try {
@@ -1715,9 +1705,6 @@
                     const { error } = await supabase.from('votes').insert(inserts);
                     if (!error || error.code === '23505') {
                         serverSuccess = true;
-                        if (error && error.code === '23505') {
-                            // Wurde bereits abgestimmt, aber wir behandeln es als Erfolg
-                        }
                     } else {
                         console.warn('Supabase-Insert-Fehler:', error);
                     }
@@ -1726,7 +1713,6 @@
                 }
             }
 
-            // Fallback: Lokale Speicherung
             const votes = loadVotes();
             votes.q1[SELECTIONS.q1]++;
             votes.q2[SELECTIONS.q2]++;
@@ -1757,9 +1743,6 @@
             document.getElementById('voteBtn').disabled = true;
         }
 
-        // ═══════════════════════════════════════════
-        //  ERGEBNISSE VOM SERVER (Supabase)
-        // ═══════════════════════════════════════════
         async function loadResultsFromServer() {
             if (!supabase) {
                 showResultsLocal();
@@ -1822,8 +1805,7 @@
         }
 
         function showResultsLocal() {
-            const votes = loadVotes();
-            updateResultBars(votes);
+            updateResultBars(loadVotes());
         }
 
         function updateTallyLocal() {
@@ -1846,15 +1828,11 @@
             }
         }
 
-        // ═══════════════════════════════════════════
-        //  EXPORT / IMPORT (Offline-Backup)
-        // ═══════════════════════════════════════════
         function exportVotes() {
             const votes = loadVotes();
             const code = btoa(JSON.stringify(votes));
             document.getElementById('shareCode').textContent = code;
-            const panel = document.getElementById('sharePanel');
-            panel.classList.toggle('show');
+            document.getElementById('sharePanel').classList.toggle('show');
         }
 
         function copyCode() {
@@ -1894,9 +1872,6 @@
             }
         }
 
-        // ═══════════════════════════════════════════
-        //  STAT COUNTER ANIMATION
-        // ═══════════════════════════════════════════
         function animateCounter(el) {
             const target = parseInt(el.dataset.target, 10);
             let current = 0;
@@ -1908,9 +1883,6 @@
             }, 25);
         }
 
-        // ═══════════════════════════════════════════
-        //  SCROLL REVEAL (immer aktiv)
-        // ═══════════════════════════════════════════
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
@@ -1925,23 +1897,12 @@
             });
         }, { threshold: 0.15 });
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            revealObserver.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('.stat-card').forEach(card => revealObserver.observe(card));
 
-        document.querySelectorAll('.stat-card').forEach(card => {
-            revealObserver.observe(card);
-        });
-
-        // ═══════════════════════════════════════════
-        //  INIT
-        // ═══════════════════════════════════════════
         (function init() {
             document.getElementById('voteBtn').disabled = true;
-
-            // Session-ID generieren
             getSessionId();
-
             updateTallyLocal();
 
             if (hasVoted()) {
@@ -1949,10 +1910,8 @@
                 document.getElementById('voted-notice').style.display = 'flex';
             }
 
-            // Ergebnisse vom Server oder lokal laden
             loadResultsFromServer();
         })();
     </script>
-
 </body>
 </html>
