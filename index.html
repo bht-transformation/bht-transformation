@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demokratie am Arbeitsplatz – Team Glasshouse | BHT Berlin</title>
     <link rel="icon" type="image/ico" href="https://www.bht-berlin.de/favicon.ico">
+
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js">
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@200;300;400;500;600;700&display=swap');
 
@@ -48,7 +53,6 @@
             min-height: 100vh;
         }
 
-        /* ── BACKGROUND ── */
         .scene {
             position: fixed;
             inset: 0;
@@ -114,7 +118,6 @@
             }
         }
 
-        /* grid overlay */
         body::before {
             content: '';
             position: fixed;
@@ -127,7 +130,6 @@
             background-size: 60px 60px;
         }
 
-        /* ── GLASS UTILITY ── */
         .glass {
             background: var(--glass);
             backdrop-filter: blur(24px) saturate(180%);
@@ -143,7 +145,6 @@
             border-radius: 24px;
         }
 
-        /* ── NAV ── */
         nav {
             position: fixed;
             top: 0;
@@ -225,7 +226,6 @@
             box-shadow: 0 6px 28px rgba(0, 155, 78, 0.5);
         }
 
-        /* ── HERO ── */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -378,7 +378,6 @@
             }
         }
 
-        /* ── SECTION BASE ── */
         section {
             padding: 100px 24px;
             max-width: 1200px;
@@ -411,7 +410,6 @@
             margin-bottom: 24px;
         }
 
-        /* ── ABOUT / PROJECT SECTION ── */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -492,7 +490,6 @@
             line-height: 1.6;
         }
 
-        /* ── PILLARS ── */
         .pillars-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -544,7 +541,6 @@
             line-height: 1.7;
         }
 
-        /* ── STATS (More in Common) ── */
         .stats-section {
             background: rgba(5, 18, 38, 0.5);
             padding: 100px 0;
@@ -627,7 +623,6 @@
             margin-top: 10px;
         }
 
-        /* quote bar */
         .quote-bar {
             margin-top: 60px;
             padding: 40px 48px;
@@ -657,7 +652,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* ── TIMELINE ── */
         .timeline {
             margin-top: 60px;
             position: relative;
@@ -722,7 +716,6 @@
             line-height: 1.7;
         }
 
-        /* ── VOTING ── */
         .vote-section {
             background: rgba(5, 18, 38, 0.5);
             padding: 100px 0;
@@ -847,7 +840,6 @@
             color: #fff;
         }
 
-        /* Result bars */
         .result-bar-wrap {
             margin-top: 10px;
         }
@@ -967,7 +959,6 @@
             color: var(--text-sub);
         }
 
-        /* share panel */
         .share-panel {
             display: none;
             margin-top: 24px;
@@ -1003,7 +994,6 @@
             line-height: 1.5;
         }
 
-        /* voted already banner */
         .voted-banner {
             display: none;
             padding: 16px 24px;
@@ -1021,7 +1011,6 @@
             font-weight: 600;
         }
 
-        /* total counter */
         .vote-tally {
             text-align: center;
             margin-bottom: 32px;
@@ -1033,7 +1022,6 @@
             font-size: 1rem;
         }
 
-        /* ── FOOTER ── */
         footer {
             padding: 60px 24px 40px;
             max-width: 1200px;
@@ -1108,7 +1096,6 @@
             color: var(--text-sub);
         }
 
-        /* ── SCROLL REVEAL ── */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -1119,7 +1106,6 @@
             transform: translateY(0);
         }
 
-        /* ── RESPONSIVE ── */
         @media(max-width:900px) {
             nav {
                 padding: 14px 20px;
@@ -1137,7 +1123,6 @@
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
-    <!-- ── NAV ── -->
     <nav>
         <div class="nav-logo">
             <div class="nav-logo-mark">GH</div>
@@ -1154,7 +1139,6 @@
         </div>
     </nav>
 
-    <!-- ── HERO ── -->
     <div class="hero">
         <div class="hero-badge">
             <span class="hero-badge-dot"></span>
@@ -1194,7 +1178,6 @@
         </div>
     </div>
 
-    <!-- ── ABOUT ── -->
     <section id="about">
         <div class="section-tag">Über uns</div>
         <h2 class="section-title">Team Glasshouse –<br>Transparenz als Haltung</h2>
@@ -1242,7 +1225,6 @@
         </div>
     </section>
 
-    <!-- ── DEMOKRATIE ── -->
     <section id="demokratie">
         <div class="section-tag">Kernthema</div>
         <h2 class="section-title reveal">Was bedeutet Demokratie<br>am Arbeitsplatz?</h2>
@@ -1299,7 +1281,6 @@
             </div>
         </div>
 
-        <!-- Timeline -->
         <div class="section-tag" style="margin-top:80px;">Geschichte &amp; Kontext</div>
         <h2 class="section-title reveal" style="margin-bottom:0;">Meilensteine der<br>betrieblichen Demokratie</h2>
 
@@ -1343,7 +1324,6 @@
         </div>
     </section>
 
-    <!-- ── MORE IN COMMON STATS ── -->
     <div class="stats-section" id="studie">
         <div class="stats-inner">
             <div class="section-tag">Forschung</div>
@@ -1410,7 +1390,6 @@
         </div>
     </div>
 
-    <!-- ── ABSTIMMUNG ── -->
     <div class="vote-section" id="abstimmung">
         <div class="vote-inner">
             <div class="vote-header">
@@ -1418,7 +1397,7 @@
                 <h2 class="section-title reveal">Deine Stimme zählt</h2>
                 <p class="vote-desc reveal">
                     Nimm an unserer Umfrage zu Demokratie an der BHT teil. Pro Gerät ist eine Abstimmung
-                    möglich. Die Ergebnisse werden live gespeichert und nach deiner Stimmabgabe öffentlich angezeigt.
+                    möglich. Die Ergebnisse werden live in Supabase gespeichert und nach deiner Stimmabgabe öffentlich angezeigt.
                 </p>
             </div>
 
@@ -1558,7 +1537,7 @@
                     </div>
                 </div>
 
-            </div><!-- /poll-container -->
+            </div>
 
             <div class="vote-btn-row reveal">
                 <button class="btn-primary" id="voteBtn" onclick="submitVote()">Jetzt abstimmen</button>
@@ -1569,7 +1548,7 @@
             <div class="vote-success" id="voteSuccess">
                 <div class="vote-success-icon">🗳️</div>
                 <h4>Danke für deine Stimme!</h4>
-                <p>Deine Antworten wurden live gespeichert. Die Ergebnisse sind unten sichtbar.
+                <p>Deine Antworten wurden live in Supabase gespeichert. Die Ergebnisse sind unten sichtbar.
                     Teile den Exportcode mit deinem Team, um Stimmen zusammenzuführen (Offline-Backup).</p>
             </div>
 
@@ -1584,20 +1563,19 @@
                 margin-top:8px;"></textarea>
                 <br><button class="btn-ghost" style="margin-top:8px;" onclick="importVotes()">Ergebnisse zusammenführen</button>
                 <div class="share-info" style="margin-top:12px;">
-                    ⚠️ <strong>Hinweis:</strong> Die Ergebnisse werden primär live über Google Sheets gespeichert.
+                    ⚠️ <strong>Hinweis:</strong> Die Ergebnisse werden primär live über Supabase gespeichert.
                     Der Export-/Import-Code dient als Offline-Backup für den Fall, dass der Server nicht erreichbar ist.
                     Importierte Stimmen werden nur lokal gespeichert und nicht an den Server übertragen.
                 </div>
             </div>
 
             <p class="vote-notice">
-                🔒 Eine Stimme pro Browser/Gerät · Ergebnisse live über Google Sheets gespeichert ·
+                🔒 Eine Stimme pro Browser/Gerät · Ergebnisse live über Supabase gespeichert ·
                 Export-Code als Offline-Backup verfügbar
             </p>
         </div>
     </div>
 
-    <!-- ── FOOTER ── -->
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
@@ -1631,15 +1609,61 @@
     </footer>
 
     <script>
-        // ── API URL (Google Apps Script Web-App) ──
-        const API_URL = "https://script.google.com/macros/s/AKfycbwI8QIs1sgdwUnT_XI1gBz2FAB4dPY10og-n0Q3XT2ZqGoWBNrPpMceor9C4eDznOVH/exec";
+        // ═══════════════════════════════════════════
+        //  SUPABASE KONFIGURATION
+        // ═══════════════════════════════════════════
+        const SUPABASE_URL = "https://tjxvxajntptuhiufgolx.supabase.co";
+        const SUPABASE_ANON_KEY =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqeHZ4YWpudHB0dWhpdWZnb2x4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwODU0MDIsImV4cCI6MjA5MzY2MTQwMn0.Wv0IzdiXUR3iX2t0cksmknfY7y0luGpwGRgfRXfP8fw";
 
-        // ── STORAGE KEYS ──
+        // Supabase-Client initialisieren
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ═══════════════════════════════════════════
+        //  TABELLEN-SCHEMA (in Supabase SQL Editor ausführen):
+        // ═══════════════════════════════════════════
+        /*
+          CREATE TABLE IF NOT EXISTS votes (
+            id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+            question TEXT NOT NULL,
+            option TEXT NOT NULL,
+            session_id TEXT NOT NULL,
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            UNIQUE(question, session_id)
+          );
+
+          -- Row Level Security aktivieren
+          ALTER TABLE votes ENABLE ROW LEVEL SECURITY;
+
+          -- Öffentlichen Lese-Zugriff erlauben
+          CREATE POLICY "Allow public select" ON votes
+            FOR SELECT TO anon
+            USING (true);
+
+          -- Öffentlichen Schreib-Zugriff erlauben
+          CREATE POLICY "Allow public insert" ON votes
+            FOR INSERT TO anon
+            WITH CHECK (true);
+        */
+
+        // ═══════════════════════════════════════════
+        //  STORAGE KEYS & STATE
+        // ═══════════════════════════════════════════
         const VOTES_KEY = 'glasshouse_votes_v2';
-        const VOTED_KEY = 'glasshouse_voted_v2';
+        const VOTED_KEY = 'glasshouse_voted_v3';
+        const SESSION_KEY = 'glasshouse_session_id';
         const SELECTIONS = { q1: null, q2: null, q3: null };
 
-        // ── DEFAULT VOTE STATE (für localStorage-Fallback) ──
+        // Eindeutige Session-ID (im localStorage gespeichert)
+        function getSessionId() {
+            let sid = localStorage.getItem(SESSION_KEY);
+            if (!sid) {
+                sid = 'sid_' + crypto.randomUUID();
+                localStorage.setItem(SESSION_KEY, sid);
+            }
+            return sid;
+        }
+
         function defaultVotes() {
             return {
                 q1: { a: 0, b: 0, c: 0, d: 0 },
@@ -1668,7 +1692,9 @@
             try { localStorage.setItem(VOTED_KEY, '1'); } catch (e) {}
         }
 
-        // ── OPTION SELECTION ──
+        // ═══════════════════════════════════════════
+        //  OPTION AUSWÄHLEN
+        // ═══════════════════════════════════════════
         function selectOption(btn) {
             if (hasVoted()) return;
             const q = btn.dataset.q;
@@ -1684,7 +1710,9 @@
             document.getElementById('voteBtn').disabled = !ready;
         }
 
-        // ── SUBMIT VOTE (NEU: async mit Google Sheets API) ──
+        // ═══════════════════════════════════════════
+        //  ABSTIMMUNG EINREICHEN (Supabase)
+        // ═══════════════════════════════════════════
         async function submitVote() {
             if (hasVoted()) {
                 showResults();
@@ -1696,34 +1724,43 @@
                 return;
             }
 
-            // Button während des Requests deaktivieren
             const voteBtn = document.getElementById('voteBtn');
             voteBtn.disabled = true;
             voteBtn.textContent = 'Wird gesendet…';
 
+            const sessionId = getSessionId();
+            const inserts = [
+                { question: 'q1', option: SELECTIONS.q1, session_id: sessionId },
+                { question: 'q2', option: SELECTIONS.q2, session_id: sessionId },
+                { question: 'q3', option: SELECTIONS.q3, session_id: sessionId },
+            ];
+
             try {
-                const res = await fetch(API_URL, {
-                    method: "POST",
-                    body: JSON.stringify(SELECTIONS),
-                    headers: {
-                        "Content-Type": "application/json"
+                const { error } = await supabase
+                    .from('votes')
+                    .insert(inserts);
+
+                if (error) {
+                    // Unique-Verletzung (23505) = bereits abgestimmt
+                    if (error.code === '23505') {
+                        markVoted();
+                        disableOptions();
+                        await loadResultsFromServer();
+                        document.getElementById('voted-notice').style.display = 'flex';
+                        voteBtn.textContent = 'Jetzt abstimmen';
+                        return;
                     }
-                });
-
-                const result = await res.json();
-
-                if (result.status === "success") {
-                    markVoted();
-                    document.getElementById('voteSuccess').classList.add('show');
-                    disableOptions();
-                    await loadResultsFromServer();
-                } else {
-                    // Server antwortete, aber nicht mit success → Fallback
-                    throw new Error('Server antwortete mit unerwartetem Status');
+                    throw error;
                 }
 
+                // Erfolg
+                markVoted();
+                document.getElementById('voteSuccess').classList.add('show');
+                disableOptions();
+                await loadResultsFromServer();
+
             } catch (err) {
-                console.warn('API nicht erreichbar – fallback zu localStorage:', err);
+                console.warn('Supabase nicht erreichbar – fallback zu localStorage:', err);
                 // Fallback: Lokale Speicherung
                 const votes = loadVotes();
                 votes.q1[SELECTIONS.q1]++;
@@ -1748,33 +1785,37 @@
             document.getElementById('voteBtn').disabled = true;
         }
 
-        // ── LOAD RESULTS FROM SERVER (NEU) ──
+        // ═══════════════════════════════════════════
+        //  ERGEBNISSE VOM SERVER LADEN (Supabase)
+        // ═══════════════════════════════════════════
         async function loadResultsFromServer() {
             try {
-                const res = await fetch(API_URL);
-                const votes = await res.json();
+                const { data, error } = await supabase
+                    .from('votes')
+                    .select('question, option, session_id');
 
-                ['q1', 'q2', 'q3'].forEach(q => {
-                    const container = document.getElementById('res-' + q);
-                    if (container) container.style.display = 'block';
+                if (error) throw error;
 
-                    const total = Object.values(votes[q]).reduce((s, v) => s + v, 0) || 1;
+                // Clientseitige Aggregation
+                const votes = {
+                    q1: { a: 0, b: 0, c: 0, d: 0 },
+                    q2: { a: 0, b: 0, c: 0, d: 0 },
+                    q3: { a: 0, b: 0, c: 0, d: 0 },
+                    total: 0
+                };
+                const voterSessions = new Set();
 
-                    ['a', 'b', 'c', 'd'].forEach(a => {
-                        const pct = Math.round((votes[q][a] / total) * 100);
-                        const bar = document.getElementById('bar-' + q + '-' + a);
-                        const pctEl = document.getElementById('pct-' + q + '-' + a);
-
-                        if (bar) {
-                            setTimeout(() => { bar.style.width = pct + '%'; }, 100);
-                        }
-                        if (pctEl) {
-                            pctEl.textContent = pct + '%';
-                        }
-                    });
+                data.forEach(row => {
+                    if (votes[row.question] && votes[row.question][row.option] !== undefined) {
+                        votes[row.question][row.option]++;
+                    }
+                    voterSessions.add(row.session_id);
                 });
+                votes.total = voterSessions.size;
 
-                document.getElementById('totalVotes').textContent = votes.total || 0;
+                // UI aktualisieren
+                updateResultBars(votes);
+                document.getElementById('totalVotes').textContent = votes.total;
 
             } catch (err) {
                 console.warn('Ergebnisse konnten nicht vom Server geladen werden – zeige lokale Daten:', err);
@@ -1783,20 +1824,34 @@
             }
         }
 
-        // ── SHOW RESULTS (lokal, als Fallback) ──
-        function showResultsLocal() {
-            const votes = loadVotes();
+        function updateResultBars(votes) {
             ['q1', 'q2', 'q3'].forEach(q => {
-                document.getElementById('res-' + q).style.display = 'block';
+                const container = document.getElementById('res-' + q);
+                if (container) container.style.display = 'block';
+
                 const total = Object.values(votes[q]).reduce((s, v) => s + v, 0) || 1;
+
                 ['a', 'b', 'c', 'd'].forEach(a => {
                     const pct = Math.round((votes[q][a] / total) * 100);
                     const bar = document.getElementById('bar-' + q + '-' + a);
                     const pctEl = document.getElementById('pct-' + q + '-' + a);
-                    setTimeout(() => { if (bar) bar.style.width = pct + '%'; }, 100);
-                    if (pctEl) pctEl.textContent = pct + '%';
+
+                    if (bar) {
+                        setTimeout(() => { bar.style.width = pct + '%'; }, 100);
+                    }
+                    if (pctEl) {
+                        pctEl.textContent = pct + '%';
+                    }
                 });
             });
+        }
+
+        // ═══════════════════════════════════════════
+        //  LOKALE ERGEBNISSE (Fallback)
+        // ═══════════════════════════════════════════
+        function showResultsLocal() {
+            const votes = loadVotes();
+            updateResultBars(votes);
         }
 
         function updateTallyLocal() {
@@ -1804,9 +1859,7 @@
             document.getElementById('totalVotes').textContent = v.total || 0;
         }
 
-        // ── Öffentliche showResults (wird von hasVoted()-Fällen und toggle genutzt) ──
         function showResults() {
-            // Primär vom Server laden
             loadResultsFromServer();
         }
 
@@ -1821,7 +1874,9 @@
             }
         }
 
-        // ── EXPORT / IMPORT (nur localStorage, als Offline-Backup) ──
+        // ═══════════════════════════════════════════
+        //  EXPORT / IMPORT (Offline-Backup)
+        // ═══════════════════════════════════════════
         function exportVotes() {
             const votes = loadVotes();
             const code = btoa(JSON.stringify(votes));
@@ -1867,7 +1922,9 @@
             }
         }
 
-        // ── STAT COUNTER ANIMATION ──
+        // ═══════════════════════════════════════════
+        //  STAT COUNTER ANIMATION
+        // ═══════════════════════════════════════════
         function animateCounter(el) {
             const target = parseInt(el.dataset.target, 10);
             let current = 0;
@@ -1879,7 +1936,9 @@
             }, 25);
         }
 
-        // ── SCROLL REVEAL ──
+        // ═══════════════════════════════════════════
+        //  SCROLL REVEAL
+        // ═══════════════════════════════════════════
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
@@ -1902,18 +1961,23 @@
             revealObserver.observe(card);
         });
 
-        // ── INIT ──
+        // ═══════════════════════════════════════════
+        //  INIT
+        // ═══════════════════════════════════════════
         (function init() {
             document.getElementById('voteBtn').disabled = true;
+
+            // Session-ID generieren (für Supabase)
+            getSessionId();
+
             updateTallyLocal();
 
             if (hasVoted()) {
                 disableOptions();
-                showResults();
                 document.getElementById('voted-notice').style.display = 'flex';
             }
 
-            // Immer live Ergebnisse vom Server laden (auch ohne eigene Stimmabgabe)
+            // Live-Ergebnisse vom Server laden
             loadResultsFromServer();
         })();
     </script>
