@@ -5,36 +5,519 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demokratie am Arbeitsplatz – Team Greenhouse | BHT Berlin</title>
     <link rel="icon" type="image/ico" href="https://www.bht-berlin.de/favicon.ico">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@200;300;400;500;600;700&display=swap');
 
-        :root {
-            --navy: #0A1F38;
-            --navy-mid: #112952;
-            --bht-green: #009B4E;
-            --bht-green-l: #00C862;
-            --teal: #00B4D8;
-            --gold: #E0A800;
-            --white: #FFFFFF;
-            --glass: rgba(255, 255, 255, 0.07);
-            --glass-md: rgba(255, 255, 255, 0.11);
-            --glass-strong: rgba(255, 255, 255, 0.16);
-            --border: rgba(255, 255, 255, 0.13);
-            --border-green: rgba(0, 155, 78, 0.4);
-            --text: #FFFFFF;
-            --text-sub: rgba(255, 255, 255, 0.72);
-            --text-muted: rgba(255, 255, 255, 0.45);
-            --shadow: 0 8px 48px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
+    <!-- ═══ Stylesheet hier einbinden ═══ -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <div class="scene"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
+    <!-- ── NAV ── -->
+    <nav>
+        <div class="nav-logo">
+            <div class="nav-logo-mark">BHT</div>
+            <div>
+                <div class="nav-title">Team Greenhouse</div>
+                <div class="nav-sub">Transformation Design &amp; Print · BHT Berlin</div>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#about">Projekt</a>
+            <a href="#demokratie">Demokratie</a>
+            <a href="#studie">Studie</a>
+            <a href="#abstimmung" class="nav-cta">Abstimmung</a>
+        </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <div class="hero">
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Projektmodul II · SoSe 2025
+        </div>
+        <h1>Demokratie am<br><span>Arbeitsplatz</span></h1>
+        <p class="hero-sub">
+            Wie verändert demokratische Mitbestimmung Organisationen, Hochschulen und
+            kreative Studios? Eine Informationsseite von Team Greenhouse im Rahmen des
+            Studiengangs Transformation Design &amp; Print an der BHT Berlin.
+        </p>
+        <div class="hero-cards">
+            <div class="hero-card">
+                <div class="hero-card-icon">🏛️</div>
+                <div class="hero-card-label">Studiengang</div>
+                <div class="hero-card-text">Transformation Design &amp; Print</div>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon">🔬</div>
+                <div class="hero-card-label">Modul</div>
+                <div class="hero-card-text">Projektmodul II</div>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon">✨</div>
+                <div class="hero-card-label">Team</div>
+                <div class="hero-card-text">Team Greenhouse</div>
+            </div>
+            <div class="hero-card">
+                <div class="hero-card-icon">📍</div>
+                <div class="hero-card-label">Hochschule</div>
+                <div class="hero-card-text">BHT Berlin</div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-line"></div>
+            Scrollen
+        </div>
+    </div>
+
+    <!-- ── ABOUT ── -->
+    <section id="about">
+        <div class="section-tag">Über uns</div>
+        <h2 class="section-title">Team Greenhouse –<br>Transparenz als Haltung</h2>
+
+        <div class="about-grid">
+            <div class="about-main reveal">
+                <h3>Wer sind wir?</h3>
+                <p>
+                    Team Greenhouse ist eine Projektgruppe im Studiengang <strong>Transformation Design &amp; Print</strong> an der
+                    <strong>Berliner Hochschule für Technik (BHT)</strong>. Der Name ist Programm: Glasshäuser stehen für
+                    Transparenz, Verletzlichkeit und den Mut, gesehen zu werden – Werte, die wir in der
+                    demokratischen Mitbestimmung wiederfinden.
+                </p>
+                <p>
+                    Im Rahmen von <strong>Projektmodul II</strong> beschäftigen wir uns mit der Frage, wie demokratische
+                    Prinzipien nicht nur in der Gesellschaft, sondern konkret im Arbeitsalltag, in Hochschulen
+                    und kreativen Organisationen gelebt werden können.
+                </p>
+                <p>
+                    Unser Ansatz verbindet Designforschung, Visualisierung und partizipative Methoden –
+                    mit dem Ziel, Demokratie nicht als abstraktes Konzept, sondern als greifbare,
+                    gestaltbare Praxis zu vermitteln.
+                </p>
+            </div>
+            <div class="about-stack">
+                <div class="about-card reveal">
+                    <div class="about-card-num">Kontext 01</div>
+                    <h4>Transformation Design &amp; Print</h4>
+                    <p>Ein innovativer Studiengang, der klassisches Printdesign mit zukunftsorientierten
+                        Transformationsprozessen verbindet. Gesellschaftlicher Wandel wird gestalterisch greifbar.</p>
+                </div>
+                <div class="about-card reveal">
+                    <div class="about-card-num">Kontext 02</div>
+                    <h4>Projektmodul II</h4>
+                    <p>Das Kernmodul für angewandte Forschung und kollaboratives Arbeiten. Studierende entwickeln
+                        eigenständige Projekte mit realem gesellschaftlichem Mehrwert – von der Recherche bis zum Prototyp.</p>
+                </div>
+                <div class="about-card reveal">
+                    <div class="about-card-num">Kontext 03</div>
+                    <h4>BHT Berlin</h4>
+                    <p>Die Berliner Hochschule für Technik vereint anwendungsorientierte Wissenschaft mit
+                        kritischem Denken – eine Hochschule, die Transformation lebt, nicht nur lehrt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── DEMOKRATIE ── -->
+    <section id="demokratie">
+        <div class="section-tag">Kernthema</div>
+        <h2 class="section-title reveal">Was bedeutet Demokratie<br>am Arbeitsplatz?</h2>
+        <p class="reveal" style="color:var(--text-sub);max-width:680px;line-height:1.8;margin-bottom:16px;">
+            Demokratie endet nicht an der Tür zum Büro oder Atelier. Betriebliche Mitbestimmung,
+            transparente Entscheidungsprozesse und kollektive Verantwortung sind nicht nur ethisch
+            geboten – sie machen Organisationen widerstandsfähiger, kreativer und gerechter.
+        </p>
+
+        <div class="pillars-grid">
+            <div class="pillar reveal">
+                <div class="pillar-glow"></div>
+                <div class="pillar-icon">🗳️</div>
+                <h3>Mitbestimmung</h3>
+                <p>Mitarbeiter:innen und Studierende haben das Recht, bei Entscheidungen, die sie betreffen,
+                    gehört zu werden. Von Arbeitszeitmodellen bis zu Curricula – demokratische Beteiligung stärkt
+                    Commitment und Qualität.</p>
+            </div>
+            <div class="pillar reveal">
+                <div class="pillar-glow"></div>
+                <div class="pillar-icon">🔍</div>
+                <h3>Transparenz</h3>
+                <p>Offene Kommunikation über Ziele, Budgets und Entscheidungsprozesse schafft Vertrauen.
+                    Transparenz ist die Grundlage jeder demokratischen Kultur – im Betriebsrat wie im Seminarraum.</p>
+            </div>
+            <div class="pillar reveal">
+                <div class="pillar-glow"></div>
+                <div class="pillar-icon">⚖️</div>
+                <h3>Faire Strukturen</h3>
+                <p>Hierarchien müssen nicht verschwinden, aber sie müssen begründbar sein. Flache Strukturen,
+                    Rotation von Rollen und klare Beschwerdewege sind Werkzeuge demokratischer Gestaltung.</p>
+            </div>
+            <div class="pillar reveal">
+                <div class="pillar-glow"></div>
+                <div class="pillar-icon">🤝</div>
+                <h3>Kollektive Verantwortung</h3>
+                <p>Demokratie am Arbeitsplatz bedeutet auch, gemeinsam Verantwortung zu übernehmen –
+                    für Entscheidungen, Fehler und Erfolge. Verteilte Verantwortung stärkt die Resilienz
+                    von Organisationen.</p>
+            </div>
+            <div class="pillar reveal">
+                <div class="pillar-glow"></div>
+                <div class="pillar-icon">📢</div>
+                <h3>Psychologische Sicherheit</h3>
+                <p>Nur wer sich sicher fühlt, seine Meinung zu äußern, kann wirklich teilhaben. Demokratische
+                    Kulturen fördern aktiv das Sprechen über Fehler, Bedenken und neue Ideen – ohne Angst.</p>
+            </div>
+            <div class="pillar reveal">
+                <div class="pillar-glow"></div>
+                <div class="pillar-icon">🌱</div>
+                <h3>Gestaltungsräume</h3>
+                <p>Demokratie braucht Räume: physische Meeting-Formate, digitale Tools, aber auch Zeit und
+                    Mandat. Werkzeuge wie Soziokratie, Holakratie oder Basisdemokratie bieten konkrete Methoden.</p>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="section-tag" style="margin-top:80px;">Geschichte &amp; Kontext</div>
+        <h2 class="section-title reveal" style="margin-bottom:0;">Meilensteine der<br>betrieblichen Demokratie</h2>
+
+        <div class="timeline">
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-date">1952</div>
+                    <h4>Betriebsverfassungsgesetz (Deutschland)</h4>
+                    <p>Gesetzliche Verankerung von Betriebsräten und Mitbestimmungsrechten in deutschen
+                        Unternehmen. Ein historischer Meilenstein für Arbeitnehmerrechte in der Bundesrepublik.</p>
+                </div>
+            </div>
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-date">1976</div>
+                    <h4>Mitbestimmungsgesetz</h4>
+                    <p>Unternehmen ab 2.000 Mitarbeitenden müssen paritätische Aufsichtsräte einrichten –
+                        Arbeitnehmer:innen gleichberechtigt neben Aktionär:innen im Kontrollgremium.</p>
+                </div>
+            </div>
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-date">2000er</div>
+                    <h4>Agile &amp; partizipative Methoden</h4>
+                    <p>Scrum, Kanban, Holakratie – eine neue Welle demokratisch orientierter Organisationsmodelle
+                        verbreitet sich, besonders in der Kreativ- und Technologiebranche.</p>
+                </div>
+            </div>
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-card">
+                    <div class="tl-date">Heute</div>
+                    <h4>New Work</h4>
+                    <p>Post-Pandemie neu verhandeln Organisationen das Miteinander: Hybridarbeit, 4-Tage-Woche,
+                        Studierendenpartizipation in Hochschulgremien – Demokratie wird neu definiert.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── MORE IN COMMON STATS ── -->
+    <div class="stats-section" id="studie">
+        <div class="stats-inner">
+            <div class="section-tag">Forschung</div>
+            <h2 class="section-title reveal">Demokratieverständnis in<br>Deutschland heute</h2>
+            <p class="reveal" style="color:var(--text-sub);max-width:660px;line-height:1.8;margin-bottom:8px;">
+                Was denken Menschen in Deutschland über Demokratie, Zusammenhalt und Identität?
+                Die Studie <em>„Deutsche Identität(en)"</em> von <strong>More in Common</strong> (November 2025)
+                liefert aufschlussreiche Daten – mit direkten Implikationen für demokratische Arbeits- und Lernkulturen.
+            </p>
+            <div class="stats-source reveal">
+                📊 Quelle: More in Common, „Deutsche Identität(en)?" Nov. 2025 · n=2.000+
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card reveal">
+                    <div class="stat-num" data-target="72">0</div>
+                    <div class="stat-context">%</div>
+                    <div class="stat-label">fühlen sich Deutschland räumlich verbunden</div>
+                    
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num" data-target="85">0</div>
+                    <div class="stat-context">%</div>
+                    <div class="stat-label">betrachten Deutschland als ihre Heimat</div>
+                    
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num" data-target="65">0</div>
+                    <div class="stat-context">%</div>
+                    <div class="stat-label">wünschen sich eine „verbindliche Debatte" über gemeinsame Werte</div>
+                    
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num" data-target="52">0</div>
+                    <div class="stat-context">%</div>
+                    <div class="stat-label">glauben eher an den internationalen Abstieg Deutschlands</div>
+                    
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num" data-target="45">0</div>
+                    <div class="stat-context">%</div>
+                    <div class="stat-label">fordern mehr Raum für Jüngere in gesellschaftlichen Debatten</div>
+                    
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num" data-target="72">0</div>
+                    <div class="stat-context">%</div>
+                    <div class="stat-label">bekennen sich zur grundsätzlichen Erwerbbarkeit der deutschen Staatsbürgerschaft</div>
+                    
+                </div>
+            </div>
+
+            <div class="quote-bar reveal" style="margin-top:48px;">
+                <blockquote>
+                    „Wirtschaftsunternehmen können über ihre <strong>Identifikationswirkung, Investitionen und ihre Kultur
+                        am Arbeitsplatz</strong> wirken. All dies kann die Verständigung über verbindende Selbstbilder
+                    in der Bundesrepublik befördern."
+                </blockquote>
+                <div class="quote-source">— More in Common, Deutsche Identität(en)?, November 2025</div>
+            </div>
+
+            <div class="quote-bar reveal" style="margin-top:24px; border-left-color:var(--teal);">
+                <blockquote>
+                    Die am häufigsten gewählten Attribute zur Beschreibung Deutschlands heute:
+                    <strong>„bürokratisch"</strong> und <strong>„gespalten"</strong> – ein klarer Auftrag
+                    für neue demokratische Formen der Mitgestaltung, auch und gerade im Arbeitsumfeld.
+                </blockquote>
+                <div class="quote-source" style="color:var(--teal);">— More in Common, 2025 · Relevanz für demokratische Arbeitskulturen</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── ABSTIMMUNG ── -->
+    <div class="vote-section" id="abstimmung">
+        <div class="vote-inner">
+            <div class="vote-header">
+                <div class="section-tag" style="justify-content:center;">Live-Abstimmung</div>
+                <h2 class="section-title reveal">Deine Stimme zählt</h2>
+                <p class="vote-desc reveal">
+                    Nimm an unserer Umfrage zu Demokratie an der BHT teil. Pro Gerät ist eine Abstimmung
+                    möglich. Die Ergebnisse werden live über Supabase gespeichert und nach deiner Stimmabgabe öffentlich angezeigt.
+                </p>
+            </div>
+
+            <div class="vote-tally reveal">
+                Bisherige Abstimmungen gesamt: <strong id="totalVotes">–</strong>
+            </div>
+
+            <div id="voted-notice" class="voted-banner" style="display:none;">
+                ✅&nbsp; <span>Du hast bereits abgestimmt.</span>&nbsp; Die aktuellen Live-Ergebnisse sind unten sichtbar.
+            </div>
+
+            <div class="poll-container" id="pollContainer">
+
+                <!-- Q1 -->
+                <div class="poll-card reveal">
+                    <div class="poll-q-num">Frage 01 / 03</div>
+                    <div class="poll-q">Wie demokratisch erlebst du deinen Studienalltag an der BHT?</div>
+                    <div class="poll-options" id="q1-options">
+                        <button class="poll-option" data-q="q1" data-a="a" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Sehr demokratisch
+                        </button>
+                        <button class="poll-option" data-q="q1" data-a="b" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Eher demokratisch
+                        </button>
+                        <button class="poll-option" data-q="q1" data-a="c" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Wenig demokratisch
+                        </button>
+                        <button class="poll-option" data-q="q1" data-a="d" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Gar nicht demokratisch
+                        </button>
+                    </div>
+                    <div class="result-bar-wrap" id="res-q1" style="display:none; margin-top:24px;">
+                        <div class="result-row">
+                            <div class="result-label">Sehr demokratisch</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q1-a"></div></div>
+                            <div class="result-pct" id="pct-q1-a">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Eher demokratisch</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q1-b"></div></div>
+                            <div class="result-pct" id="pct-q1-b">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Wenig demokratisch</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q1-c"></div></div>
+                            <div class="result-pct" id="pct-q1-c">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Gar nicht demokratisch</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q1-d"></div></div>
+                            <div class="result-pct" id="pct-q1-d">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="poll-card reveal">
+                    <div class="poll-q-num">Frage 02 / 03</div>
+                    <div class="poll-q">Welche Form der Mitbestimmung ist dir am wichtigsten im Studium?</div>
+                    <div class="poll-options" id="q2-options">
+                        <button class="poll-option" data-q="q2" data-a="a" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Bei Projektthemen &amp; Inhalten
+                        </button>
+                        <button class="poll-option" data-q="q2" data-a="b" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Bei Bewertungskriterien
+                        </button>
+                        <button class="poll-option" data-q="q2" data-a="c" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Bei Lehr- &amp; Lernmethoden
+                        </button>
+                        <button class="poll-option" data-q="q2" data-a="d" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Bei Stundenplan &amp; Organisation
+                        </button>
+                    </div>
+                    <div class="result-bar-wrap" id="res-q2" style="display:none; margin-top:24px;">
+                        <div class="result-row">
+                            <div class="result-label">Projektthemen &amp; Inhalte</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q2-a"></div></div>
+                            <div class="result-pct" id="pct-q2-a">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Bewertungskriterien</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q2-b"></div></div>
+                            <div class="result-pct" id="pct-q2-b">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Lehr- &amp; Lernmethoden</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q2-c"></div></div>
+                            <div class="result-pct" id="pct-q2-c">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Stundenplan &amp; Organisation</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q2-d"></div></div>
+                            <div class="result-pct" id="pct-q2-d">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="poll-card reveal">
+                    <div class="poll-q-num">Frage 03 / 03</div>
+                    <div class="poll-q">Demokratie am Arbeitsplatz – was beschreibt am besten deinen Wunsch?</div>
+                    <div class="poll-options" id="q3-options">
+                        <button class="poll-option" data-q="q3" data-a="a" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Mehr Beteiligung an Entscheidungen
+                        </button>
+                        <button class="poll-option" data-q="q3" data-a="b" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Mehr Transparenz von Leitungen
+                        </button>
+                        <button class="poll-option" data-q="q3" data-a="c" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Flachere Hierarchien &amp; Rollen
+                        </button>
+                        <button class="poll-option" data-q="q3" data-a="d" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Status quo passt mir gut so
+                        </button>
+                    </div>
+                    <div class="result-bar-wrap" id="res-q3" style="display:none; margin-top:24px;">
+                        <div class="result-row">
+                            <div class="result-label">Mehr Beteiligung</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q3-a"></div></div>
+                            <div class="result-pct" id="pct-q3-a">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Mehr Transparenz</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q3-b"></div></div>
+                            <div class="result-pct" id="pct-q3-b">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Flachere Hierarchien</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q3-c"></div></div>
+                            <div class="result-pct" id="pct-q3-c">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Status quo passt</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q3-d"></div></div>
+                            <div class="result-pct" id="pct-q3-d">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /poll-container -->
+
+            <div class="vote-btn-row reveal">
+                <button class="btn-primary" id="voteBtn" onclick="submitVote()">Jetzt abstimmen</button>
+                <button class="btn-ghost" onclick="toggleResults()">Ergebnisse anzeigen</button>
+                <button class="btn-ghost" onclick="exportVotes()">📤 Ergebnisse teilen</button>
+            </div>
+
+            <div class="vote-success" id="voteSuccess">
+                <div class="vote-success-icon">🗳️</div>
+                <h4>Danke für deine Stimme!</h4>
+                <p>Deine Antworten wurden live in Supabase gespeichert. Die Ergebnisse sind unten sichtbar.</p>
+            </div>
+
+            <div class="share-panel" id="sharePanel">
+                <h5>🔗 Ergebnisse-Exportcode (Offline-Backup)</h5>
+                <div class="share-code" id="shareCode"></div>
+                <button class="btn-ghost" style="margin-bottom:12px;" onclick="copyCode()">Code kopieren</button><br>
+                <h5 style="margin-top:16px;">📥 Fremde Ergebnisse importieren (Offline-Backup)</h5>
+                <textarea id="importCode" placeholder="Exportcode hier einfügen…"
+                style="width:100%;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:8px;
+                padding:12px;color:#fff;font-family:monospace;font-size:0.75rem;resize:vertical;min-height:60px;
+                margin-top:8px;"></textarea>
+                <br><button class="btn-ghost" style="margin-top:8px;" onclick="importVotes()">Ergebnisse zusammenführen</button>
+                <div class="share-info" style="margin-top:12px;">
+                    ⚠️ <strong>Hinweis:</strong> Die Ergebnisse werden primär live über Supabase gespeichert.
+                    Der Export-/Import-Code dient als Offline-Backup für den Fall, dass der Server nicht erreichbar ist.
+                    Importierte Stimmen werden nur lokal gespeichert und nicht an den Server übertragen.
+                </div>
+            </div>
+
+            <p class="vote-notice">
+                🔒 Eine Stimme pro Browser/Gerät · Ergebnisse live über Supabase gespeichert ·
+                Export-Code als Offline-Backup verfügbar
+            </p>
+        </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Team Greenhouse</h3>
+                <p>Ein Projekt im Studiengang Transformation Design &amp; Print an der
+                    Berliner Hochschule für Technik (BHT Berlin) im Rahmen des Projektmoduls II.
+                Demokratie ist gestaltbar – lasst sie uns gemeinsam gestalten.</p>
+            </div>
+            <div class="footer-links">
+                <h5>Themen</h5>
+                <a href="#demokratie">Demokratie am Arbeitsplatz</a>
+                <a href="#studie">More in Common Studie</a>
+                <a href="#abstimmung">Live-Abstimmung</a>
+                <a href="#about">Über das Projekt</a>
+            </div>
+            <div class="footer-links">
+                <h5>Quellen</h5>
+                <a href="https://www.moreincommon.de" target="_blank">More in Common DE</a>
+                <a href="https://www.bht-berlin.de" target="_blank">BHT Berlin</a>
+                <a href="https://www.dgfp.de" target="_blank">DGFP Mitbestimmung</a>
+                <a href="https://www.boeckler.de" target="_blank">Hans-Böckler-Stiftung</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Team Greenhouse · Transformation Design &amp; Print · BHT Berlin</span>
+            <div class="footer-bht">
+                <div class="footer-bht-badge">BHT BERLIN</div>
+                <div class="footer-bht-badge">PROJEKTMODUL II</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ JavaScript hier einbinden ═══ -->
+    <script src="script.js"></script>
+</body>
+</html>
         html {
             scroll-behavior: smooth;
             font-size: 16px;
