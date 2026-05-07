@@ -214,85 +214,13 @@ function importVotes() {
 }
 
 // ══════════════════════════════════════════════════════
-// LOKALES VOTING FÜR SEITE 2 (Röhren)
+// ICEBERG & QUOTE CAROUSEL (Seite 2)
 // ══════════════════════════════════════════════════════
-const LOCAL_VOTED_KEY = 'analogerAktivismus_userVoted';
-const LOCAL_VOTES_KEY = 'analogerAktivismus_votes';
-
-let localVotes = { wenig: 0, mittel: 0, viel: 0 };
-try {
-    const saved = localStorage.getItem(LOCAL_VOTES_KEY);
-    if (saved) localVotes = JSON.parse(saved);
-} catch(e){}
-
-function hasLocalVoted() {
-    return !!localStorage.getItem(LOCAL_VOTED_KEY);
-}
-
-function selectLocalOption(btn) {
-    if (hasLocalVoted()) return;
-    document.querySelectorAll('#localPollOptions .poll-option').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    btn.dataset.selected = 'true';
-}
-
-function submitLocalVote() {
-    if (hasLocalVoted()) {
-        toggleLocalResults();
-        return;
-    }
-    const selected = document.querySelector('#localPollOptions .poll-option.selected');
-    if (!selected) {
-        alert('Bitte eine Auswahl treffen.');
-        return;
-    }
-    const answer = selected.dataset.a;
-    localVotes[answer] = (localVotes[answer] || 0) + 1;
-
-    localStorage.setItem(LOCAL_VOTES_KEY, JSON.stringify(localVotes));
-    localStorage.setItem(LOCAL_VOTED_KEY, '1');
-
-    document.getElementById('localVoteSuccess')?.classList.add('show');
-    document.querySelectorAll('#localPollOptions .poll-option').forEach(b => b.classList.add('disabled'));
-    renderLocalResults();
-}
-
-function renderLocalResults() {
-    const total = localVotes.wenig + localVotes.mittel + localVotes.viel || 1;
-    ['wenig', 'mittel', 'viel'].forEach(a => {
-        const pct = Math.round((localVotes[a] / total) * 100);
-        const bar = document.getElementById('bar-local-' + a);
-        const pctEl = document.getElementById('pct-local-' + a);
-        if (bar) setTimeout(() => { bar.style.width = pct + '%'; }, 100);
-        if (pctEl) pctEl.textContent = pct + '%';
-    });
-    const barsContainer = document.getElementById('localResultBars');
-    if (barsContainer) barsContainer.style.display = 'block';
-}
-
-function toggleLocalResults() {
-    const bars = document.getElementById('localResultBars');
-    if (!bars) return;
-    if (!bars.style.display || bars.style.display === 'none') {
-        renderLocalResults();
-    } else {
-        bars.style.display = 'none';
-    }
-}
-
-// Event-Listener für lokale Umfrage
-document.addEventListener('click', function(e) {
-    const opt = e.target.closest('#localPollOptions .poll-option');
-    if (opt) selectLocalOption(opt);
-});
-
-// Iceberg-Interaktion
 document.addEventListener('click', function(e) {
     const level = e.target.closest('.iceberg-level[data-level]');
     if (level) level.classList.toggle('revealed');
 });
 
-// Quote Carousel
 (function() {
     const container = document.getElementById('quoteCarousel');
     if (!container) return;
@@ -348,9 +276,5 @@ document.querySelectorAll('.stat-card').forEach(c => revealObserver.observe(c));
     if (document.getElementById('pollContainer')) {
         loadResultsFromSupabase();
         if (hasVoted()) disableOptions();
-    }
-    if (document.getElementById('localPollContainer') && hasLocalVoted()) {
-        document.querySelectorAll('#localPollOptions .poll-option').forEach(b => b.classList.add('disabled'));
-        renderLocalResults();
     }
 })();
