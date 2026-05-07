@@ -1,10 +1,9 @@
 // ══════════════════════════════════════════════════════
-// SUPABASE KONFIGURATION
+// SUPABASE KONFIGURATION (für Seite 1)
 // ══════════════════════════════════════════════════════
 const SUPABASE_URL  = 'https://tjxvxajntptuhiufgolx.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqeHZ4YWpudHB0dWhpdWZnb2x4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwODU0MDIsImV4cCI6MjA5MzY2MTQwMn0.Wv0IzdiXUR3iX2t0cksmknfY7y0luGpwGRgfRXfP8fw';
 
-// REST-Hilfsfunktion für Supabase PostgREST
 async function sbFetch(path, opts = {}) {
     const url = `${SUPABASE_URL}/rest/v1/${path}`;
     const headers = {
@@ -24,10 +23,10 @@ async function sbFetch(path, opts = {}) {
 }
 
 // ══════════════════════════════════════════════════════
-// LOKALER ZUSTAND
+// GLOBALE ZUSTÄNDE (Seite 1)
 // ══════════════════════════════════════════════════════
 const VOTED_KEY  = 'glasshouse_voted_v3';
-const VOTES_KEY  = 'glasshouse_votes_v3';   // nur Offline-Fallback
+const VOTES_KEY  = 'glasshouse_votes_v3';
 const SELECTIONS = { q1: null, q2: null, q3: null };
 
 function defaultVotes() {
@@ -53,9 +52,6 @@ function markVoted() {
     try { localStorage.setItem(VOTED_KEY, '1'); } catch (e) {}
 }
 
-// ══════════════════════════════════════════════════════
-// UI – OPTION AUSWÄHLEN
-// ══════════════════════════════════════════════════════
 function selectOption(btn) {
     if (hasVoted()) return;
     const q = btn.dataset.q;
@@ -64,143 +60,98 @@ function selectOption(btn) {
     btn.classList.add('selected');
     checkVoteReady();
 }
-
 function checkVoteReady() {
-    document.getElementById('voteBtn').disabled =
-        !(SELECTIONS.q1 && SELECTIONS.q2 && SELECTIONS.q3);
+    const voteBtn = document.getElementById('voteBtn');
+    if (voteBtn) voteBtn.disabled = !(SELECTIONS.q1 && SELECTIONS.q2 && SELECTIONS.q3);
 }
 
-// ══════════════════════════════════════════════════════
-// ABSTIMMEN – SUPABASE INSERT via RPC oder direktes INSERT
-// ══════════════════════════════════════════════════════
-/*
- * Erwartet eine Tabelle `votes` in Supabase mit folgendem Schema:
- *
- *   create table public.votes (
- *     id         bigserial primary key,
- *     q1         text not null check (q1 in ('a','b','c','d')),
- *     q2         text not null check (q2 in ('a','b','c','d')),
- *     q3         text not null check (q3 in ('a','b','c','d')),
- *     created_at timestamptz default now()
- *   );
- *
- *   -- RLS: INSERT für anon erlauben
- *   alter table public.votes enable row level security;
- *   create policy "anon insert" on public.votes for insert to anon with check (true);
- *   create policy "anon select" on public.votes for select to anon using (true);
- */
 async function submitVote() {
     if (hasVoted()) { showResults(); return; }
     if (!SELECTIONS.q1 || !SELECTIONS.q2 || !SELECTIONS.q3) {
         alert('Bitte alle drei Fragen beantworten.');
         return;
     }
-
     const btn = document.getElementById('voteBtn');
+    if (!btn) return;
     btn.disabled = true;
     btn.textContent = 'Wird gesendet…';
-
     try {
         await sbFetch('votes', {
             method: 'POST',
-            body: JSON.stringify({
-                q1: SELECTIONS.q1,
-                q2: SELECTIONS.q2,
-                q3: SELECTIONS.q3
-            })
+            body: JSON.stringify({ q1: SELECTIONS.q1, q2: SELECTIONS.q2, q3: SELECTIONS.q3 })
         });
-
         markVoted();
-        document.getElementById('voteSuccess').classList.add('show');
+        document.getElementById('voteSuccess')?.classList.add('show');
         disableOptions();
         await loadResultsFromSupabase();
-
     } catch (err) {
         console.warn('Supabase nicht erreichbar – lokaler Fallback:', err);
         const votes = loadLocalVotes();
-        votes.q1[SELECTIONS.q1]++;
-        votes.q2[SELECTIONS.q2]++;
-        votes.q3[SELECTIONS.q3]++;
+        votes.q1[SELECTIONS.q1]++; votes.q2[SELECTIONS.q2]++; votes.q3[SELECTIONS.q3]++;
         votes.total = (votes.total || 0) + 1;
         saveLocalVotes(votes);
         markVoted();
-        document.getElementById('voteSuccess').classList.add('show');
+        document.getElementById('voteSuccess')?.classList.add('show');
         disableOptions();
         renderResults(votes);
-        document.getElementById('totalVotes').textContent = votes.total;
+        const totalEl = document.getElementById('totalVotes');
+        if (totalEl) totalEl.textContent = votes.total;
         alert('ℹ️ Stimme lokal gespeichert – Supabase gerade nicht erreichbar.');
     }
-
     btn.textContent = 'Jetzt abstimmen';
 }
 
 function disableOptions() {
     document.querySelectorAll('.poll-option').forEach(b => b.classList.add('disabled'));
-    document.getElementById('voted-notice').style.display = 'flex';
-    document.getElementById('voteBtn').disabled = true;
+    const notice = document.getElementById('voted-notice');
+    if (notice) notice.style.display = 'flex';
+    const voteBtn = document.getElementById('voteBtn');
+    if (voteBtn) voteBtn.disabled = true;
 }
 
-// ══════════════════════════════════════════════════════
-// ERGEBNISSE VON SUPABASE LADEN
-// ══════════════════════════════════════════════════════
 async function loadResultsFromSupabase() {
     try {
-        // Alle Stimmen holen
         const rows = await sbFetch('votes?select=q1,q2,q3', { method: 'GET' });
-
         if (!rows || rows.length === 0) {
-            document.getElementById('totalVotes').textContent = '0';
+            const totalEl = document.getElementById('totalVotes');
+            if (totalEl) totalEl.textContent = '0';
             return;
         }
-
-        // Aggregation im Browser
         const agg = defaultVotes();
         agg.total = rows.length;
-
         rows.forEach(row => {
             if (agg.q1[row.q1] !== undefined) agg.q1[row.q1]++;
             if (agg.q2[row.q2] !== undefined) agg.q2[row.q2]++;
             if (agg.q3[row.q3] !== undefined) agg.q3[row.q3]++;
         });
-
         renderResults(agg);
-        document.getElementById('totalVotes').textContent = agg.total;
-
+        const totalEl = document.getElementById('totalVotes');
+        if (totalEl) totalEl.textContent = agg.total;
     } catch (err) {
         console.warn('Supabase-Ergebnisse nicht ladbar:', err);
-        // Lokalen Fallback anzeigen
         const local = loadLocalVotes();
         renderResults(local);
-        document.getElementById('totalVotes').textContent = local.total || 0;
+        const totalEl = document.getElementById('totalVotes');
+        if (totalEl) totalEl.textContent = local.total || 0;
     }
 }
 
-// ══════════════════════════════════════════════════════
-// ERGEBNISSE RENDERN
-// ══════════════════════════════════════════════════════
 function renderResults(votes) {
     ['q1', 'q2', 'q3'].forEach(q => {
         const container = document.getElementById('res-' + q);
         if (container) container.style.display = 'block';
-
         const total = Object.values(votes[q]).reduce((s, v) => s + v, 0) || 1;
-
         ['a', 'b', 'c', 'd'].forEach(a => {
-            const pct  = Math.round(((votes[q][a] || 0) / total) * 100);
-            const bar  = document.getElementById('bar-' + q + '-' + a);
+            const pct = Math.round(((votes[q][a] || 0) / total) * 100);
+            const bar = document.getElementById('bar-' + q + '-' + a);
             const pctEl = document.getElementById('pct-' + q + '-' + a);
-            if (bar)   setTimeout(() => { bar.style.width = pct + '%'; }, 100);
+            if (bar) setTimeout(() => { bar.style.width = pct + '%'; }, 100);
             if (pctEl) pctEl.textContent = pct + '%';
         });
     });
 }
 
-// ══════════════════════════════════════════════════════
-// ÖFFENTLICHE FUNKTIONEN
-// ══════════════════════════════════════════════════════
-function showResults() {
-    loadResultsFromSupabase();
-}
+function showResults() { loadResultsFromSupabase(); }
 
 function toggleResults() {
     const r1 = document.getElementById('res-q1');
@@ -208,25 +159,28 @@ function toggleResults() {
         loadResultsFromSupabase();
     } else {
         ['q1', 'q2', 'q3'].forEach(q => {
-            document.getElementById('res-' + q).style.display = 'none';
+            const el = document.getElementById('res-' + q);
+            if (el) el.style.display = 'none';
         });
     }
 }
 
-// ── EXPORT / IMPORT (Offline-Backup, nur lokal) ──
 function exportVotes() {
     const votes = loadLocalVotes();
     const code = btoa(JSON.stringify(votes));
-    document.getElementById('shareCode').textContent = code;
-    document.getElementById('sharePanel').classList.toggle('show');
+    const shareCode = document.getElementById('shareCode');
+    if (shareCode) shareCode.textContent = code;
+    document.getElementById('sharePanel')?.classList.toggle('show');
 }
 
 function copyCode() {
-    const code = document.getElementById('shareCode').textContent;
+    const code = document.getElementById('shareCode')?.textContent;
+    if (!code) return;
     navigator.clipboard.writeText(code)
         .then(() => alert('Code in Zwischenablage kopiert!'))
         .catch(() => {
             const el = document.getElementById('shareCode');
+            if (!el) return;
             const range = document.createRange();
             range.selectNode(el);
             window.getSelection().removeAllRanges();
@@ -235,12 +189,12 @@ function copyCode() {
 }
 
 function importVotes() {
-    const raw = document.getElementById('importCode').value.trim();
+    const raw = document.getElementById('importCode')?.value.trim();
     if (!raw) { alert('Bitte Code einfügen.'); return; }
     try {
         const imported = JSON.parse(atob(raw));
-        const current  = loadLocalVotes();
-        const merged   = defaultVotes();
+        const current = loadLocalVotes();
+        const merged = defaultVotes();
         ['q1', 'q2', 'q3'].forEach(q => {
             ['a', 'b', 'c', 'd'].forEach(a => {
                 merged[q][a] = (current[q][a] || 0) + (imported[q][a] || 0);
@@ -249,21 +203,120 @@ function importVotes() {
         merged.total = (current.total || 0) + (imported.total || 0);
         saveLocalVotes(merged);
         renderResults(merged);
-        document.getElementById('totalVotes').textContent = merged.total;
+        const totalEl = document.getElementById('totalVotes');
+        if (totalEl) totalEl.textContent = merged.total;
         alert('✅ ' + (imported.total || '?') + ' weitere Stimmen lokal zusammengeführt.');
-        document.getElementById('importCode').value = '';
+        const importField = document.getElementById('importCode');
+        if (importField) importField.value = '';
     } catch (e) {
-        alert('Ungültiger Code. Bitte den vollständigen Exportcode einfügen.');
+        alert('Ungültiger Code.');
     }
 }
 
 // ══════════════════════════════════════════════════════
-// STAT-COUNTER ANIMATION
+// LOKALES VOTING FÜR SEITE 2 (Röhren)
+// ══════════════════════════════════════════════════════
+const LOCAL_VOTED_KEY = 'analogerAktivismus_userVoted';
+const LOCAL_VOTES_KEY = 'analogerAktivismus_votes';
+
+let localVotes = { wenig: 0, mittel: 0, viel: 0 };
+try {
+    const saved = localStorage.getItem(LOCAL_VOTES_KEY);
+    if (saved) localVotes = JSON.parse(saved);
+} catch(e){}
+
+function hasLocalVoted() {
+    return !!localStorage.getItem(LOCAL_VOTED_KEY);
+}
+
+function selectLocalOption(btn) {
+    if (hasLocalVoted()) return;
+    document.querySelectorAll('#localPollOptions .poll-option').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    btn.dataset.selected = 'true';
+}
+
+function submitLocalVote() {
+    if (hasLocalVoted()) {
+        toggleLocalResults();
+        return;
+    }
+    const selected = document.querySelector('#localPollOptions .poll-option.selected');
+    if (!selected) {
+        alert('Bitte eine Auswahl treffen.');
+        return;
+    }
+    const answer = selected.dataset.a;
+    localVotes[answer] = (localVotes[answer] || 0) + 1;
+
+    localStorage.setItem(LOCAL_VOTES_KEY, JSON.stringify(localVotes));
+    localStorage.setItem(LOCAL_VOTED_KEY, '1');
+
+    document.getElementById('localVoteSuccess')?.classList.add('show');
+    document.querySelectorAll('#localPollOptions .poll-option').forEach(b => b.classList.add('disabled'));
+    renderLocalResults();
+}
+
+function renderLocalResults() {
+    const total = localVotes.wenig + localVotes.mittel + localVotes.viel || 1;
+    ['wenig', 'mittel', 'viel'].forEach(a => {
+        const pct = Math.round((localVotes[a] / total) * 100);
+        const bar = document.getElementById('bar-local-' + a);
+        const pctEl = document.getElementById('pct-local-' + a);
+        if (bar) setTimeout(() => { bar.style.width = pct + '%'; }, 100);
+        if (pctEl) pctEl.textContent = pct + '%';
+    });
+    const barsContainer = document.getElementById('localResultBars');
+    if (barsContainer) barsContainer.style.display = 'block';
+}
+
+function toggleLocalResults() {
+    const bars = document.getElementById('localResultBars');
+    if (!bars) return;
+    if (!bars.style.display || bars.style.display === 'none') {
+        renderLocalResults();
+    } else {
+        bars.style.display = 'none';
+    }
+}
+
+// Event-Listener für lokale Umfrage
+document.addEventListener('click', function(e) {
+    const opt = e.target.closest('#localPollOptions .poll-option');
+    if (opt) selectLocalOption(opt);
+});
+
+// Iceberg-Interaktion
+document.addEventListener('click', function(e) {
+    const level = e.target.closest('.iceberg-level[data-level]');
+    if (level) level.classList.toggle('revealed');
+});
+
+// Quote Carousel
+(function() {
+    const container = document.getElementById('quoteCarousel');
+    if (!container) return;
+    const slides = container.querySelectorAll('.quote-slide');
+    let current = 0;
+    function show(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        slides[index].classList.add('active');
+        current = index;
+    }
+    document.getElementById('quoteNext')?.addEventListener('click', () => show((current+1) % slides.length));
+    document.getElementById('quotePrev')?.addEventListener('click', () => show((current-1+slides.length) % slides.length));
+    let interval = setInterval(() => show((current+1) % slides.length), 5000);
+    container.addEventListener('mouseenter', () => clearInterval(interval));
+    container.addEventListener('mouseleave', () => { interval = setInterval(() => show((current+1) % slides.length), 5000); });
+})();
+
+// ══════════════════════════════════════════════════════
+// STAT-COUNTER & SCROLL REVEAL
 // ══════════════════════════════════════════════════════
 function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);
     let current = 0;
-    const step  = Math.ceil(target / 60);
+    const step = Math.ceil(target / 60);
     const timer = setInterval(() => {
         current = Math.min(current + step, target);
         el.textContent = current;
@@ -271,9 +324,6 @@ function animateCounter(el) {
     }, 25);
 }
 
-// ══════════════════════════════════════════════════════
-// SCROLL REVEAL
-// ══════════════════════════════════════════════════════
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
         if (e.isIntersecting) {
@@ -288,20 +338,19 @@ const revealObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.15 });
 
-document.querySelectorAll('.reveal').forEach(el  => revealObserver.observe(el));
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 document.querySelectorAll('.stat-card').forEach(c => revealObserver.observe(c));
 
-// ══════════════════════════════════════════════════════
 // INIT
-// ══════════════════════════════════════════════════════
-(async function init() {
-    document.getElementById('voteBtn').disabled = true;
-
-    // Immer Live-Daten von Supabase laden
-    await loadResultsFromSupabase();
-
-    if (hasVoted()) {
-        disableOptions();
-        // Ergebnisse werden bereits oben geladen & gerendert
+(function init() {
+    const voteBtn = document.getElementById('voteBtn');
+    if (voteBtn) voteBtn.disabled = true;
+    if (document.getElementById('pollContainer')) {
+        loadResultsFromSupabase();
+        if (hasVoted()) disableOptions();
+    }
+    if (document.getElementById('localPollContainer') && hasLocalVoted()) {
+        document.querySelectorAll('#localPollOptions .poll-option').forEach(b => b.classList.add('disabled'));
+        renderLocalResults();
     }
 })();
