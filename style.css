@@ -142,6 +142,8 @@ nav {
     align-items: center;
     gap: 14px;
     z-index: 210;
+    text-decoration: none;
+    color: inherit;
 }
 .nav-logo-mark {
     width: 42px;
