@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiegelintervention – Deine Stimme | Analoger Aktivismus</title>
+    <link rel="icon" type="image/ico" href="https://www.bht-berlin.de/favicon.ico">
+    <link rel="stylesheet" href="https://bht-transformation.github.io/bht-transformation/style.css">
+</head>
+<body>
+
+    <div class="scene"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <nav>
+        <div class="nav-logo">
+            <div class="nav-logo-mark">AA</div>
+            <div>
+                <div class="nav-title">Analoger Aktivismus</div>
+                <div class="nav-sub">Transformation Design &amp; Print · BHT Berlin</div>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Projekt</a>
+            <a href="wise2526.html">WiSe 25/26</a>
+            <a href="sose26.html" class="active">SoSe 26</a>
+            <a href="wise2627.html">WiSe 26/27</a>
+        </div>
+    </nav>
+
+    <div class="hero" style="min-height:auto; padding:140px 24px 60px;">
+        <h1>Spiegelintervention</h1>
+        <p class="hero-sub">Wie demokratisch ist dein Arbeitsalltag? Stimme ab und sieh, was andere denken.</p>
+    </div>
+
+    <!-- ABSTIMMUNG (identisch wie im Greenhouse-Code, aber ohne Export-Panel) -->
+    <div class="vote-section" style="padding-top:0;">
+        <div class="vote-inner">
+
+            <div class="vote-tally reveal">
+                Bisher abgestimmt: <strong id="totalVotes">–</strong>
+            </div>
+            <div id="voted-notice" class="voted-banner" style="display:none;">
+                ✅&nbsp; <span>Du hast abgestimmt.</span>&nbsp; Ergebnisse werden geladen.
+            </div>
+
+            <div class="poll-container" id="pollContainer">
+                <!-- Q1 -->
+                <div class="poll-card reveal">
+                    <div class="poll-q-num">Frage 01 / 03</div>
+                    <div class="poll-q">Wie demokratisch erlebst du deinen Arbeitsalltag?</div>
+                    <div class="poll-options" id="q1-options">
+                        <button class="poll-option" data-q="q1" data-a="a" onclick="selectOption(this)"><span class="poll-option-check">✓</span> Sehr demokratisch</button>
+                        <button class="poll-option" data-q="q1" data-a="b" onclick="selectOption(this)"><span class="poll-option-check">✓</span> Eher demokratisch</button>
+                        <button class="poll-option" data-q="q1" data-a="c" onclick="selectOption(this)"><span class="poll-option-check">✓</span> Wenig demokratisch</button>
+                        <button class="poll-option" data-q="q1" data-a="d" onclick="selectOption(this)"><span class="poll-option-check">✓</span> Gar nicht demokratisch</button>
+                    </div>
+                    <div class="result-bar-wrap" id="res-q1" style="display:none; margin-top:24px;"><!-- Balken --></div>
+                </div>
+                <!-- Q2 und Q3 analog (wie vorheriger Code) -->
+            </div>
+
+            <div class="vote-btn-row reveal">
+                <button class="btn-primary" id="voteBtn" onclick="submitVote()">Jetzt abstimmen</button>
+                <button class="btn-ghost" onclick="toggleResults()">Ergebnisse anzeigen</button>
+            </div>
+
+            <!-- Erfolgsmeldung und Link zur Hauptseite -->
+            <div class="vote-success" id="voteSuccess">
+                <div class="vote-success-icon">🗳️</div>
+                <h4>Danke für deine Stimme!</h4>
+                <p>Die Ergebnisse sind jetzt sichtbar.</p>
+            </div>
+
+            <!-- Versteckter Button: erscheint erst nach dem Abstimmen -->
+            <div id="postVoteLink" style="display:none; text-align:center; margin-top:2rem;">
+                <a href="index.html" class="btn-primary">Zurück zur Projektübersicht</a>
+            </div>
+
+            <p class="vote-notice">🔒 Eine Stimme pro Gerät · Live-Ergebnisse über Supabase</p>
+        </div>
+    </div>
+
+    <footer><!-- wie gehabt --></footer>
+
+    <script src="https://bht-transformation.github.io/bht-transformation/script.js"></script>
+    <script src="https://bht-transformation.github.io/bht-transformation/supabase.js"></script>
+</body>
+</html>
