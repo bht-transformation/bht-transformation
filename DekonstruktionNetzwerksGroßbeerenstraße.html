@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analoger Aktivismus – Dekonstruktion des Netzwerks Großbeerenstraße</title>
+    <style>
+        :root {
+            --bg: #fafaf8;
+            --surface: #ffffff;
+            --text: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --accent-red: #c0392b;
+            --accent-red-light: #e74c3c;
+            --accent-blue: #1e3a5f;
+            --accent-blue-light: #2c5f8a;
+            --gold: #c9a84c;
+            --border: #e0e0dc;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.14);
+            --radius-sm: 8px;
+            --radius: 14px;
+            --radius-lg: 22px;
+            --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Red Line Motif ── */
+        .red-line {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--accent-red);
+            z-index: 1000;
+            transform-origin: top;
+            animation: redLinePulse 4s ease-in-out infinite;
+        }
+        @keyframes redLinePulse {
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ── Navigation ── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: rgba(250, 250, 248, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            transition: var(--transition);
+        }
+        .nav.scrolled {
+            box-shadow: var(--shadow-sm);
+            background: rgba(250, 250, 248, 0.92);
+        }
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            color: var(--accent-blue);
+        }
+        .nav-logo span {
+            color: var(--accent-red);
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-red);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-red);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+        }
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        /* ── Sections ── */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .section-label {
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-red);
+            margin-bottom: 0.5rem;
+        }
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+        }
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            background: radial-gradient(ellipse at 50% 40%, rgba(192, 57, 43, 0.04) 0%, transparent 70%),
+                radial-gradient(ellipse at 70% 60%, rgba(30, 58, 95, 0.03) 0%, transparent 60%);
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-red);
+            color: #fff;
+            padding: 0.4rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            color: var(--accent-blue);
+        }
+        .hero h1 .highlight {
+            color: var(--accent-red);
+            position: relative;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        .btn-primary {
+            background: var(--accent-red);
+            color: #fff;
+            border-color: var(--accent-red);
+        }
+        .btn-primary:hover {
+            background: #a93226;
+            border-color: #a93226;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+        .btn-outline:hover {
+            background: var(--accent-blue);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            animation: bounce 2s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        /* ── Team Cards ── */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .team-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 1.8rem 1.4rem;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .team-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-red-light);
+        }
+        .team-card .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-red-light), var(--accent-red));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+            transition: var(--transition);
+        }
+        .team-card:hover .avatar {
+            transform: scale(1.08);
+            box-shadow: 0 8px 24px rgba(192, 57, 43, 0.3);
+        }
+        .team-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+            color: var(--accent-blue);
+        }
+        .team-card .role {
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Timeline / Process ── */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent-red);
+            border-radius: 2px;
+            opacity: 0.4;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 1rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-red);
+            border: 3px solid var(--bg);
+            z-index: 1;
+        }
+        .timeline-item h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent-red);
+            margin-bottom: 0.3rem;
+        }
+        .timeline-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ── Iceberg Interactive ── */
+        .iceberg-container {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .iceberg-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+        .iceberg-level {
+            width: 100%;
+            max-width: 500px;
+            padding: 1.2rem 1.5rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition-slow);
+            border: 2px solid transparent;
+            position: relative;
+            opacity: 0.7;
+            transform: scale(0.96);
+            text-align: center;
+        }
+        .iceberg-level.revealed {
+            opacity: 1;
+            transform: scale(1);
+            border-color: var(--accent-red);
+            box-shadow: var(--shadow-md);
+            background: #fff;
+        }
+        .iceberg-level.revealed .level-detail {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 0.8rem;
+            transition: var(--transition-slow);
+        }
+        .level-detail {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .iceberg-level h4 {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--accent-blue);
+        }
+        .iceberg-tip {
+            background: #e8f0fe;
+            border: 2px dashed #b0c4de;
+            max-width: 180px;
+            align-self: center;
+            font-size: 0.85rem;
+            padding: 0.7rem 1rem;
+            cursor: default;
+            opacity: 1;
+            transform: scale(1);
+            border-radius: var(--radius-lg);
+        }
+        .iceberg-tip h4 {
+            color: var(--accent-blue-light);
+        }
+        .iceberg-instruction {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* ── Stat Cards ── */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+        .stat-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .stat-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+            border-color: var(--accent-red-light);
+        }
+        .stat-number {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--accent-red);
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+        .stat-source {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 0.6rem;
+        }
+
+        /* ── Quote Carousel ── */
+        .quote-carousel {
+            position: relative;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+        .quote-slide {
+            display: none;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .quote-slide.active {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .quote-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--accent-blue);
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        .quote-author {
+            font-size: 0.85rem;
+            color: var(--accent-red);
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+        .quote-nav {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        .quote-nav button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            background: var(--surface);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .quote-nav button:hover {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ── Voting Röhren ── */
+        .voting-section {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .voting-tubes {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .voting-tube {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 1rem;
+            border-radius: var(--radius);
+            border: 2px solid transparent;
+            min-width: 100px;
+        }
+        .voting-tube:hover {
+            border-color: var(--accent-red-light);
+            background: #fef9f8;
+            transform: translateY(-4px);
+        }
+        .voting-tube.selected {
+            border-color: var(--accent-red);
+            background: #fef5f4;
+        }
+        .tube-visual {
+            width: 60px;
+            height: 100px;
+            border-radius: 12px;
+            background: #f0f0ec;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            border: 2px solid #d0d0cc;
+            position: relative;
+        }
+        .tube-fill {
+            width: 100%;
+            background: var(--accent-red);
+            transition: var(--transition-slow);
+            border-radius: 0 0 10px 10px;
+        }
+        .voting-tube span {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+        }
+        .vote-count {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .voting-reset {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+        }
+
+        /* ── Hypothesis Cards ── */
+        .hypothesis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .hypothesis-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--accent-red);
+            transition: var(--transition);
+            position: relative;
+        }
+        .hypothesis-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+        .hypothesis-card .hyp-num {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(192, 57, 43, 0.1);
+            line-height: 1;
+        }
+        .hypothesis-card h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent-red);
+            margin-bottom: 0.5rem;
+        }
+        .hypothesis-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ── Hebel Section ── */
+        .hebel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+        .hebel-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 1.4rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: default;
+        }
+        .hebel-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-red-light);
+            transform: translateY(-3px);
+        }
+        .hebel-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .hebel-card h5 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 0.4rem;
+        }
+        .hebel-card p {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--accent-blue);
+            color: #fff;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        footer a {
+            color: #f0c0b0;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ── Scroll Reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-slow);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 56px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: rgba(250, 250, 248, 0.96);
+                backdrop-filter: blur(16px);
+                padding: 1rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+            section {
+                padding: 3rem 1rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .stat-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .voting-tubes {
+                gap: 0.8rem;
+            }
+            .hypothesis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Red Line -->
+    <div class="red-line"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-logo">Analoger<span>Aktivismus</span></div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#hero">Start</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#prozess">Prozess</a></li>
+            <li><a href="#dekonstruktion">Dekonstruktion</a></li>
+            <li><a href="#hypothesen">Hypothesen</a></li>
+            <li><a href="#interaktiv">Mitmachen</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-badge">Wintersemester 2025/26</div>
+        <h1>Demokratie<br>im <span class="highlight">Gewerbegebiet?</span></h1>
+        <p>
+            Wer spricht im Netzwerk Großbeerenstraße – und wer hört nur zu?
+            Unsere Dekonstruktion zeigt: Zwischen Leitbild und gelebter Kommunikation
+            liegen Machtasymmetrien, Förderlogiken und blinde Flecken.
+        </p>
+        <div class="hero-cta">
+            <a href="#dekonstruktion" class="btn btn-primary">Die Analyse erkunden</a>
+            <a href="#interaktiv" class="btn btn-outline">Selbst abstimmen</a>
+        </div>
+        <div class="scroll-indicator">↓ scrollen</div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <p class="section-label">Das Team</p>
+        <h2 class="section-title">Analoger Aktivismus</h2>
+        <p class="section-subtitle">
+            Sieben Transformation-Designer:innen der BHT, die sich zusammengefunden haben,
+            um demokratische Werte und Kommunikation in einem echten Unternehmensnetzwerk zu untersuchen.
+        </p>
+        <div class="team-grid">
+            <div class="team-card reveal">
+                <div class="avatar">NZ</div>
+                <h3>Natalie Zühlke</h3>
+                <p class="role">Teamflow-Designerin</p>
+            </div>
+            <div class="team-card reveal">
+                <div class="avatar">JB</div>
+                <h3>Julika Buss</h3>
+                <p class="role">Workflow-Architektin</p>
+            </div>
+            <div class="team-card reveal">
+                <div class="avatar">RM</div>
+                <h3>Rosa Martens</h3>
+                <p class="role">Potenzialanalystin</p>
+            </div>
+            <div class="team-card reveal">
+                <div class="avatar">JaB</div>
+                <h3>Jakob Braun</h3>
+                <p class="role">TimeRisk Coach</p>
+            </div>
+            <div class="team-card reveal">
+                <div class="avatar">LM</div>
+                <h3>Lea Martens</h3>
+                <p class="role">Rule Keeper</p>
+            </div>
+            <div class="team-card reveal">
+                <div class="avatar">JD</div>
+                <h3>Jenny Dinse</h3>
+                <p class="role">Rule Keeper</p>
+            </div>
+            <div class="team-card reveal">
+                <div class="avatar">PE</div>
+                <h3>Paula Eder</h3>
+                <p class="role">Stakeholder Lead</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prozess Timeline -->
+    <section id="prozess">
+        <p class="section-label">Unser Weg</p>
+        <h2 class="section-title">Vom Selbst zum System</h2>
+        <p class="section-subtitle">
+            In sechs Phasen haben wir uns vom individuellen Kompetenzmapping über die Partneranalyse
+            bis zur Semesterausstellung „Rundgang" entwickelt.
+        </p>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <h4>Phase 1 – Selbstreflexion & Teamfindung</h4>
+                <p>Lernbiografien, Kompetenzmapping, Wertesystem – wir haben unsere eigenen Stärken und Werte kartiert und uns als Team „Analoger Aktivismus" gefunden.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <h4>Phase 2 – Themen-Matching & Zielbild</h4>
+                <p>Unser Fokusnugget: „Haltung stärken – Demokratie – Wertevermittlung". Wir haben Purpose, Vision und Mission formuliert und die Greenhouse-Charta mit dem Partner vereinbart.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <h4>Phase 3 – Forschungsfokus & Methodik</h4>
+                <p>Dekonstruktion als Methode: Wir haben vier Analyse-Dimensionen aufgespannt – Visuelle Codes, Kommunikationscodes, Real-Life-Codes und Systemcodes/Machtstrukturen.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <h4>Phase 4 – Datenerhebung & Analyse</h4>
+                <p>Interview mit René Mühlroth, Feldbeobachtung vor Ort, Dokumentenanalyse von Website, Broschüren, Newsletter-Archiv und Vereinssatzung.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <h4>Phase 5 – Synthese & Hypothesen</h4>
+                <p>Aus den vier Analyse-Dimensionen haben wir Strukturmuster abgeleitet und zwei Kern-Hypothesen formuliert.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <h4>Phase 6 – Rundgang</h4>
+                <p>Wir haben unsere Ergebnisse als begehbare Macht- und Kommunikationslandschaft inszeniert – mit Iceberg, Stakeholder-Booklet, Stickies und interaktiven Elementen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Iceberg Interactive -->
+    <section id="dekonstruktion">
+        <p class="section-label">Dekonstruktion</p>
+        <h2 class="section-title">Der Iceberg des Netzwerks</h2>
+        <p class="section-subtitle">
+            Klicke auf die Ebenen unter der Wasseroberfläche, um die verborgenen Strukturen
+            und Mentalitäten sichtbar zu machen – genau wie auf unserem gedruckten Triplefold beim Rundgang.
+        </p>
+        <div class="iceberg-container">
+            <p class="iceberg-instruction">👆 Klicke auf die unteren Ebenen, um sie zu enthüllen</p>
+            <div class="iceberg-visual">
+                <!-- Spitze – sichtbar -->
+                <div class="iceberg-level iceberg-tip revealed">
+                    <h4>🌊 Ebene 1 – Ereignisse</h4>
+                    <p style="font-size:0.8rem;color:var(--text-secondary);">Demokratie-Workshops, Newsletter, CSR-Preisverleihungen</p>
+                </div>
+                <!-- Ebene 2 -->
+                <div class="iceberg-level" data-level="2">
+                    <h4>🔍 Ebene 2 – Muster</h4>
+                    <div class="level-detail">
+                        <p>Kommunikation fokussiert auf Geschäftsführungen. Demokratie wird projektbezogen gedacht, nicht im Alltag verankert. Die Reichweite endet meist beim mittleren Management.</p>
+                    </div>
+                </div>
+                <!-- Ebene 3 -->
+                <div class="iceberg-level" data-level="3">
+                    <h4>⚙️ Ebene 3 – Strukturen</h4>
+                    <div class="level-detail">
+                        <p>Ehrenamtlicher Vorstand, eine 500€-Hilfskraft, projektfinanzierte Kommunikationsstelle. Förderlogik bestimmt, was sichtbar wird. Vereinsrecht mit einer Stimme pro Unternehmen – aber faktische Dominanz weniger großer Player.</p>
+                    </div>
+                </div>
+                <!-- Ebene 4 -->
+                <div class="iceberg-level" data-level="4">
+                    <h4>🧠 Ebene 4 – Mentalitäten</h4>
+                    <div class="level-detail">
+                        <p>„Politik gehört nicht ins Unternehmen." – „Demokratie ist Event, nicht Alltag." – „Angebote für Mitarbeitende besser filtern, sonst entsteht Erwartungsdruck." Diese unsichtbaren Glaubenssätze stabilisieren das System.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistiken -->
+    <section>
+        <p class="section-label">Zahlen & Fakten</p>
+        <h2 class="section-title">Demokratie in der Arbeitswelt</h2>
+        <div class="stat-grid">
+            <div class="stat-card reveal">
+                <div class="stat-number" data-target="52662">0</div>
+                <div class="stat-label">Stunden verbringen Arbeitnehmer:innen in Deutschland im Laufe ihres Lebens mit Arbeit.</div>
+                <div class="stat-source">Roman Herzog Institut, 2023</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-number" data-target="23">0</div>
+                <div class="stat-label">% der Unternehmen mit 250+ Beschäftigten fördern innerbetriebliche Demokratie.</div>
+                <div class="stat-source">Monitor Unternehmensengagement, 2025</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-number" data-target="8">0</div>
+                <div class="stat-label">% der großen Unternehmen stellen Mitarbeitende für Demokratieförderung frei.</div>
+                <div class="stat-source">Monitor Unternehmensengagement, 2025</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-number" data-target="49">0</div>
+                <div class="stat-label">% der Befragten fühlen sich mit ihrem Arbeitsplatz verbunden.</div>
+                <div class="stat-source">More in Common, 2025</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-number" data-target="34">0</div>
+                <div class="stat-label">% spüren zunehmend Druck aus dem Unternehmen, sich politisch zu positionieren.</div>
+                <div class="stat-source">Monitor Unternehmensengagement, 2025</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-number" data-target="48">0</div>
+                <div class="stat-label">% der Befragten waren mit der Demokratie in Deutschland unzufrieden.</div>
+                <div class="stat-source">ZDF Politbarometer, 2025</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Carousel -->
+    <section>
+        <p class="section-label">Stimmen aus dem Netzwerk</p>
+        <h2 class="section-title">Was uns erzählt wurde</h2>
+        <div class="quote-carousel" id="quoteCarousel">
+            <div class="quote-slide active">
+                <p class="quote-text">„Ehrenamt heißt immer: begrenzte Ressourcen."</p>
+                <p class="quote-author">– Netzwerkmitglied</p>
+            </div>
+            <div class="quote-slide">
+                <p class="quote-text">„Wir haben eine politische Verantwortung als Unternehmen – gerade in der aktuellen Situation."</p>
+                <p class="quote-author">– Netzwerkmitglied</p>
+            </div>
+            <div class="quote-slide">
+                <p class="quote-text">„Nichts zu sagen, ist auch schon politisch."</p>
+                <p class="quote-author">– Netzwerkmitglied</p>
+            </div>
+            <div class="quote-slide">
+                <p class="quote-text">„Angemeldet sein im Netzwerk ist wie ein Fitnessstudio: Wer nicht hingeht, sieht keine Ergebnisse."</p>
+                <p class="quote-author">– Netzwerkmitglied</p>
+            </div>
+            <div class="quote-slide">
+                <p class="quote-text">„Wir müssen Demokratie-Werbung für die machen, die anti Demokratie sind."</p>
+                <p class="quote-author">– Vorstand Netzwerk</p>
+            </div>
+            <div class="quote-slide">
+                <p class="quote-text">„In Krisensituationen stecken hier alle die Köpfe zusammen – das funktioniert einfach."</p>
+                <p class="quote-author">– Netzwerkmitglied</p>
+            </div>
+        </div>
+        <div class="quote-nav">
+            <button id="quotePrev" aria-label="Vorheriges Zitat">◀</button>
+            <button id="quoteNext" aria-label="Nächstes Zitat">▶</button>
+        </div>
+    </section>
+
+    <!-- Hypothesen -->
+    <section id="hypothesen">
+        <p class="section-label">Point of Entry</p>
+        <h2 class="section-title">Unsere Hypothesen für Semester 2</h2>
+        <p class="section-subtitle">
+            Diese Thesen sind unser Ausrufezeichen – hier werden wir im nächsten Semester
+            die Hebel für eine Intervention ansetzen.
+        </p>
+        <div class="hypothesis-grid">
+            <div class="hypothesis-card reveal">
+                <div class="hyp-num">01</div>
+                <h4>Hypothese 1</h4>
+                <p>Demokratische Werte werden nach außen kommuniziert, doch die bestehenden Kanäle bilden sie im Alltag nicht ausreichend ab. Eine Umgestaltung der Kommunikationswege könnte die Lücke zwischen Anspruch und gelebter Praxis schließen.</p>
+            </div>
+            <div class="hypothesis-card reveal">
+                <div class="hyp-num">02</div>
+                <h4>Hypothese 2</h4>
+                <p>Wenn demokratische Kommunikation verständlich, inklusiv und auf echte Beteiligung ausgerichtet ist, werden mehr Perspektiven berücksichtigt und mehr Menschen fühlen sich motiviert, aktiv teilzunehmen.</p>
+            </div>
+            <div class="hypothesis-card reveal">
+                <div class="hyp-num">03</div>
+                <h4>Hypothese 3</h4>
+                <p>Solange Projekte und Förderlogiken die Kommunikation steuern, bleibt demokratische Kultur ein Event – kein Alltag. Mehr Hauptamt und klare Zuständigkeiten sind Voraussetzung für echte Verankerung.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interventionshebel -->
+    <section>
+        <p class="section-label">Ausblick</p>
+        <h2 class="section-title">Mögliche Hebel für die Intervention</h2>
+        <div class="hebel-grid">
+            <div class="hebel-card reveal">
+                <div class="icon">🗣️</div>
+                <h5>Kommunikativ</h5>
+                <p>Newsletter für Mitarbeitende, Kampagnen im öffentlichen Raum des Gewerbegebiets</p>
+            </div>
+            <div class="hebel-card reveal">
+                <div class="icon">🎨</div>
+                <h5>Visuell</h5>
+                <p>Neues Corporate Design, das Werte alltagsintegriert transportiert</p>
+            </div>
+            <div class="hebel-card reveal">
+                <div class="icon">🤝</div>
+                <h5>Sozial</h5>
+                <p>Peer-to-Peer-Formate, partizipative Workshops mit Azubis und Mitarbeitenden</p>
+            </div>
+            <div class="hebel-card reveal">
+                <div class="icon">🔄</div>
+                <h5>Systemisch</h5>
+                <p>Neue Rituale für bottom-up-Kommunikation, unabhängig von Förderlogik</p>
+            </div>
+            <div class="hebel-card reveal">
+                <div class="icon">📍</div>
+                <h5>Räumlich</h5>
+                <p>Wanderausstellung durch Unternehmen, Intervention im Begegnungsraum</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interaktive Abstimmung -->
+    <section id="interaktiv">
+        <p class="section-label">Mitmachen</p>
+        <h2 class="section-title">Wie viel Platz sollte Politik im Arbeitsalltag haben?</h2>
+        <p class="section-subtitle">
+            Diese Frage haben wir auch den Besucher:innen unseres Rundgangs gestellt.
+            Schnapp dir einen digitalen Stern und wirf ihn in die Röhre, die deiner Meinung entspricht.
+        </p>
+        <div class="voting-section">
+            <div class="voting-tubes" id="votingTubes">
+                <div class="voting-tube" data-vote="wenig">
+                    <div class="tube-visual"><div class="tube-fill" style="height:0%"></div></div>
+                    <span>Nur begrenzt</span>
+                    <div class="vote-count">0 Sterne</div>
+                </div>
+                <div class="voting-tube" data-vote="mittel">
+                    <div class="tube-visual"><div class="tube-fill" style="height:0%"></div></div>
+                    <span>Sollte Teil davon sein</span>
+                    <div class="vote-count">0 Sterne</div>
+                </div>
+                <div class="voting-tube" data-vote="viel">
+                    <div class="tube-visual"><div class="tube-fill" style="height:0%"></div></div>
+                    <span>Gar keinen</span>
+                    <div class="vote-count">0 Sterne</div>
+                </div>
+            </div>
+            <p style="font-size:0.85rem;color:var(--text-secondary);">⭐ Klicke auf eine Röhre, um abzustimmen!</p>
+            <button class="voting-reset" id="votingReset">Abstimmung zurücksetzen</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Analoger Aktivismus</strong> – Team im Master Transformation Design & Print</p>
+        <p>Berliner Hochschule für Technik (BHT) | Projektmodul M01 | Wintersemester 2025/26</p>
+        <p>Partner: <a href="https://www.netzwerk-grossbeerenstrasse.de" target="_blank" rel="noopener">Netzwerk Großbeerenstraße e.V.</a></p>
+        <p style="margin-top:1rem;font-size:0.75rem;opacity:0.7;">Diese Seite dokumentiert den Stand zum Ende des ersten Semesters und dient als Grundlage für die Interventionsentwicklung in Semester 2.</p>
+    </footer>
+
+    <script>
+        // ── Mobile Nav Toggle ──
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // ── Nav Scroll Effect ──
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // ── Smooth scroll and close mobile nav ──
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ── Iceberg Click Interaction ──
+        document.querySelectorAll('.iceberg-level[data-level]').forEach(level => {
+            level.addEventListener('click', () => {
+                level.classList.toggle('revealed');
+            });
+        });
+
+        // ── Scroll Reveal with Intersection Observer ──
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        revealElements.forEach(el => observer.observe(el));
+
+        // ── Stat Counter Animation ──
+        const statCards = document.querySelectorAll('.stat-number[data-target]');
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.getAttribute('data-target'));
+                    const duration = 1800;
+                    const startTime = performance.now();
+
+                    function updateCounter(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        el.textContent = Math.round(eased * target) + (target === 52662 ? '' :
+                            '%');
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            el.textContent = target.toLocaleString('de-DE') + (target === 52662 ?
+                                '' : '%');
+                        }
+                    }
+                    requestAnimationFrame(updateCounter);
+                    statObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        statCards.forEach(el => statObserver.observe(el));
+
+        // ── Quote Carousel ──
+        const slides = document.querySelectorAll('.quote-slide');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        document.getElementById('quoteNext').addEventListener('click', () => {
+            showSlide((currentSlide + 1) % totalSlides);
+        });
+        document.getElementById('quotePrev').addEventListener('click', () => {
+            showSlide((currentSlide - 1 + totalSlides) % totalSlides);
+        });
+
+        // Auto-advance quotes
+        let quoteInterval = setInterval(() => {
+            showSlide((currentSlide + 1) % totalSlides);
+        }, 5000);
+
+        document.getElementById('quoteCarousel').addEventListener('mouseenter', () => {
+            clearInterval(quoteInterval);
+        });
+        document.getElementById('quoteCarousel').addEventListener('mouseleave', () => {
+            quoteInterval = setInterval(() => {
+                showSlide((currentSlide + 1) % totalSlides);
+            }, 5000);
+        });
+
+        // ── Voting Tubes ──
+        let votes = { wenig: 0, mittel: 0, viel: 0 };
+        const totalVotesKey = 'analogerAktivismus_totalVotes';
+        const votesKey = 'analogerAktivismus_votes';
+        const userVotedKey = 'analogerAktivismus_userVoted';
+
+        // Load saved votes
+        try {
+            const savedVotes = localStorage.getItem(votesKey);
+            const savedTotal = localStorage.getItem(totalVotesKey);
+            if (savedVotes && savedTotal) {
+                votes = JSON.parse(savedVotes);
+            }
+        } catch (e) { /* ignore */ }
+
+        function updateTubeVisuals() {
+            const total = votes.wenig + votes.mittel + votes.viel;
+            const maxVotes = Math.max(1, total);
+            document.querySelectorAll('.voting-tube').forEach(tube => {
+                const voteType = tube.getAttribute('data-vote');
+                const fill = tube.querySelector('.tube-fill');
+                const countEl = tube.querySelector('.vote-count');
+                const percentage = (votes[voteType] / maxVotes) * 80;
+                fill.style.height = Math.max(percentage, votes[voteType] > 0 ? 6 : 0) + '%';
+                countEl.textContent = votes[voteType] + ' Sterne';
+            });
+        }
+
+        function saveVotes() {
+            try {
+                localStorage.setItem(votesKey, JSON.stringify(votes));
+                localStorage.setItem(totalVotesKey, votes.wenig + votes.mittel + votes.viel);
+            } catch (e) { /* ignore */ }
+        }
+
+        document.querySelectorAll('.voting-tube').forEach(tube => {
+            tube.addEventListener('click', () => {
+                const voteType = tube.getAttribute('data-vote');
+                votes[voteType]++;
+                updateTubeVisuals();
+                saveVotes();
+                // Brief animation
+                tube.classList.add('selected');
+                setTimeout(() => tube.classList.remove('selected'), 600);
+            });
+        });
+
+        document.getElementById('votingReset').addEventListener('click', () => {
+            votes = { wenig: 0, mittel: 0, viel: 0 };
+            updateTubeVisuals();
+            saveVotes();
+        });
+
+        // Initial render
+        updateTubeVisuals();
+
+        // ── Active nav link on scroll ──
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === '#' + current) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        console.log('%c🖐️ Hallo! Schön, dass du hier bist. %cDies ist die interaktive Dokumentation von %cAnaloger Aktivismus%c – Team im Master Transformation Design & Print der BHT. %cWir dekonstruieren Macht- und Kommunikationsstrukturen im Netzwerk Großbeerenstraße.',
+            'font-size:1.1rem;font-weight:bold;',
+            '',
+            'color:#c0392b;font-weight:bold;',
+            '',
+            'color:#666;');
+        console.log('%c👉 Klicke auf die Eisberg-Ebenen, stimme bei der Umfrage ab und entdecke die Zitate!',
+            'font-style:italic;');
+    </script>
+</body>
+</html>
