@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spiegelintervention – Deine Stimme | Analoger Aktivismus</title>
     <link rel="icon" type="image/ico" href="https://www.bht-berlin.de/favicon.ico">
-    <link rel="stylesheet" href="https://bht-transformation.github.io/bht-transformation/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -35,7 +35,6 @@
         <p class="hero-sub">Wie demokratisch ist dein Arbeitsalltag? Stimme ab und sieh, was andere denken.</p>
     </div>
 
-    <!-- ABSTIMMUNG (identisch wie im Greenhouse-Code, aber ohne Export-Panel) -->
     <div class="vote-section" style="padding-top:0;">
         <div class="vote-inner">
 
@@ -47,19 +46,131 @@
             </div>
 
             <div class="poll-container" id="pollContainer">
-                <!-- Q1 -->
+                <!-- Frage 1 -->
                 <div class="poll-card reveal">
                     <div class="poll-q-num">Frage 01 / 03</div>
                     <div class="poll-q">Wie demokratisch erlebst du deinen Arbeitsalltag?</div>
                     <div class="poll-options" id="q1-options">
-                        <button class="poll-option" data-q="q1" data-a="a" onclick="selectOption(this)"><span class="poll-option-check">✓</span> Sehr demokratisch</button>
-                        <button class="poll-option" data-q="q1" data-a="b" onclick="selectOption(this)"><span class="poll-option-check">✓</span> Eher demokratisch</button>
-                        <button class="poll-option" data-q="q1" data-a="c" onclick="selectOption(this)"><span class="poll-option-check">✓</span> Wenig demokratisch</button>
-                        <button class="poll-option" data-q="q1" data-a="d" onclick="selectOption(this)"><span class="poll-option-check">✓</span> Gar nicht demokratisch</button>
+                        <button class="poll-option" data-q="q1" data-a="a" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Sehr demokratisch
+                        </button>
+                        <button class="poll-option" data-q="q1" data-a="b" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Eher demokratisch
+                        </button>
+                        <button class="poll-option" data-q="q1" data-a="c" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Wenig demokratisch
+                        </button>
+                        <button class="poll-option" data-q="q1" data-a="d" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Gar nicht demokratisch
+                        </button>
                     </div>
-                    <div class="result-bar-wrap" id="res-q1" style="display:none; margin-top:24px;"><!-- Balken --></div>
+                    <div class="result-bar-wrap" id="res-q1" style="display:none; margin-top:24px;">
+                        <div class="result-row">
+                            <div class="result-label">Sehr demokratisch</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q1-a"></div></div>
+                            <div class="result-pct" id="pct-q1-a">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Eher demokratisch</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q1-b"></div></div>
+                            <div class="result-pct" id="pct-q1-b">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Wenig demokratisch</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q1-c"></div></div>
+                            <div class="result-pct" id="pct-q1-c">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Gar nicht demokratisch</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q1-d"></div></div>
+                            <div class="result-pct" id="pct-q1-d">0%</div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Q2 und Q3 analog (wie vorheriger Code) -->
+
+                <!-- Frage 2 -->
+                <div class="poll-card reveal">
+                    <div class="poll-q-num">Frage 02 / 03</div>
+                    <div class="poll-q">Welche Form der Mitbestimmung ist dir am wichtigsten in deinem Job?</div>
+                    <div class="poll-options" id="q2-options">
+                        <button class="poll-option" data-q="q2" data-a="a" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Bei Projektthemen &amp; Inhalten
+                        </button>
+                        <button class="poll-option" data-q="q2" data-a="b" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Bei Bewertungskriterien
+                        </button>
+                        <button class="poll-option" data-q="q2" data-a="c" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Bei Lehr- &amp; Lernmethoden
+                        </button>
+                        <button class="poll-option" data-q="q2" data-a="d" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Bei Arbeitszeit &amp; Organisation
+                        </button>
+                    </div>
+                    <div class="result-bar-wrap" id="res-q2" style="display:none; margin-top:24px;">
+                        <div class="result-row">
+                            <div class="result-label">Projektthemen &amp; Inhalte</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q2-a"></div></div>
+                            <div class="result-pct" id="pct-q2-a">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Bewertungskriterien</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q2-b"></div></div>
+                            <div class="result-pct" id="pct-q2-b">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Lehr- &amp; Lernmethoden</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q2-c"></div></div>
+                            <div class="result-pct" id="pct-q2-c">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Arbeitszeit &amp; Organisation</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q2-d"></div></div>
+                            <div class="result-pct" id="pct-q2-d">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frage 3 -->
+                <div class="poll-card reveal">
+                    <div class="poll-q-num">Frage 03 / 03</div>
+                    <div class="poll-q">Was wünschst du dir für deinen Arbeitsalltag?</div>
+                    <div class="poll-options" id="q3-options">
+                        <button class="poll-option" data-q="q3" data-a="a" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Mehr Beteiligung an Entscheidungen
+                        </button>
+                        <button class="poll-option" data-q="q3" data-a="b" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Mehr Transparenz von Führungskräften
+                        </button>
+                        <button class="poll-option" data-q="q3" data-a="c" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Flachere Hierarchien &amp; Rollen
+                        </button>
+                        <button class="poll-option" data-q="q3" data-a="d" onclick="selectOption(this)">
+                            <span class="poll-option-check">✓</span> Status quo passt mir gut so
+                        </button>
+                    </div>
+                    <div class="result-bar-wrap" id="res-q3" style="display:none; margin-top:24px;">
+                        <div class="result-row">
+                            <div class="result-label">Mehr Beteiligung</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q3-a"></div></div>
+                            <div class="result-pct" id="pct-q3-a">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Mehr Transparenz</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q3-b"></div></div>
+                            <div class="result-pct" id="pct-q3-b">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Flachere Hierarchien</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q3-c"></div></div>
+                            <div class="result-pct" id="pct-q3-c">0%</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">Status quo passt</div>
+                            <div class="result-bar-bg"><div class="result-bar-fill" id="bar-q3-d"></div></div>
+                            <div class="result-pct" id="pct-q3-d">0%</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="vote-btn-row reveal">
@@ -67,14 +178,12 @@
                 <button class="btn-ghost" onclick="toggleResults()">Ergebnisse anzeigen</button>
             </div>
 
-            <!-- Erfolgsmeldung und Link zur Hauptseite -->
             <div class="vote-success" id="voteSuccess">
                 <div class="vote-success-icon">🗳️</div>
                 <h4>Danke für deine Stimme!</h4>
                 <p>Die Ergebnisse sind jetzt sichtbar.</p>
             </div>
 
-            <!-- Versteckter Button: erscheint erst nach dem Abstimmen -->
             <div id="postVoteLink" style="display:none; text-align:center; margin-top:2rem;">
                 <a href="index.html" class="btn-primary">Zurück zur Projektübersicht</a>
             </div>
@@ -83,9 +192,35 @@
         </div>
     </div>
 
-    <footer><!-- wie gehabt --></footer>
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Analoger Aktivismus</h3>
+                <p>Master Transformation Design &amp; Print · BHT Berlin<br>
+                Partner: Netzwerk Großbeerenstraße e.V.</p>
+            </div>
+            <div class="footer-links">
+                <h5>Semester</h5>
+                <a href="wise2526.html">WiSe 25/26</a>
+                <a href="sose26.html">SoSe 26</a>
+                <a href="wise2627.html">WiSe 26/27</a>
+            </div>
+            <div class="footer-links">
+                <h5>Links</h5>
+                <a href="https://www.bht-berlin.de" target="_blank">BHT Berlin</a>
+                <a href="https://www.netzwerk-grossbeerenstrasse.de" target="_blank">Netzwerk Großbeerenstraße</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Analoger Aktivismus · BHT Berlin</span>
+            <div class="footer-bht">
+                <div class="footer-bht-badge">BHT BERLIN</div>
+                <div class="footer-bht-badge">TRANSFORMATION DESIGN</div>
+            </div>
+        </div>
+    </footer>
 
-    <script src="https://bht-transformation.github.io/bht-transformation/script.js"></script>
-    <script src="https://bht-transformation.github.io/bht-transformation/supabase.js"></script>
+    <script src="script.js"></script>
+    <script src="supabase.js"></script>
 </body>
 </html>
