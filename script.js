@@ -30,7 +30,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 document.querySelectorAll('.stat-card').forEach(c => revealObserver.observe(c));
 
 // ══════════════════════════════════════════════════════
-// ICEBERG (Seite 2)
+// ICEBERG
 // ══════════════════════════════════════════════════════
 document.addEventListener('click', function(e) {
     const level = e.target.closest('.iceberg-level[data-level]');
@@ -38,7 +38,7 @@ document.addEventListener('click', function(e) {
 });
 
 // ══════════════════════════════════════════════════════
-// QUOTE CAROUSEL (Seite 2)
+// QUOTE CAROUSEL
 // ══════════════════════════════════════════════════════
 (function() {
     const container = document.getElementById('quoteCarousel');
@@ -56,3 +56,22 @@ document.addEventListener('click', function(e) {
     container.addEventListener('mouseenter', () => clearInterval(interval));
     container.addEventListener('mouseleave', () => { interval = setInterval(() => show((current+1) % slides.length), 5000); });
 })();
+
+// ══════════════════════════════════════════════════════
+// MOBILE NAV TOGGLE
+// ══════════════════════════════════════════════════════
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        navToggle.classList.toggle('active');
+    });
+    // Menü schließen, wenn ein Link angeklickt wird
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            navToggle.classList.remove('active');
+        });
+    });
+}
