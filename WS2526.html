@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <!-- Hintergrund-Orbs (aus dem Navy-Theme) -->
+    <!-- Hintergrund-Orbs -->
     <div class="scene"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -31,7 +31,6 @@
             <a href="#prozess">Prozess</a>
             <a href="#dekonstruktion">Dekonstruktion</a>
             <a href="#hypothesen">Hypothesen</a>
-            <a href="#interaktiv" class="nav-cta">Mitmachen</a>
         </div>
     </nav>
 
@@ -357,58 +356,6 @@
                 <p>Wanderausstellung durch Unternehmen, Intervention im Begegnungsraum</p>
             </div>
         </div>
-    </section>
-
-    <!-- Interaktive Abstimmung -->
-    <section id="interaktiv">
-        <div class="section-tag">Mitmachen</div>
-        <h2 class="section-title reveal">Wie viel Platz sollte Politik im Arbeitsalltag haben?</h2>
-        <p class="reveal" style="color:var(--text-sub);max-width:600px;line-height:1.7;margin-bottom:2rem;">
-            Schnapp dir einen digitalen Stern und wirf ihn in die Röhre, die deiner Meinung entspricht.
-        </p>
-
-        <div id="localPollContainer" class="poll-card reveal">
-            <div class="poll-q-num">Frage</div>
-            <div class="poll-q">Politik am Arbeitsplatz – deine Haltung?</div>
-            <div class="poll-options" id="localPollOptions">
-                <button class="poll-option" data-a="wenig">
-                    <span class="poll-option-check">✓</span> Nur begrenzt
-                </button>
-                <button class="poll-option" data-a="mittel">
-                    <span class="poll-option-check">✓</span> Sollte Teil davon sein
-                </button>
-                <button class="poll-option" data-a="viel">
-                    <span class="poll-option-check">✓</span> Gar keinen
-                </button>
-            </div>
-            <div class="result-bar-wrap" id="localResultBars" style="display:none; margin-top:24px;">
-                <div class="result-row">
-                    <div class="result-label">Nur begrenzt</div>
-                    <div class="result-bar-bg"><div class="result-bar-fill" id="bar-local-wenig"></div></div>
-                    <div class="result-pct" id="pct-local-wenig">0%</div>
-                </div>
-                <div class="result-row">
-                    <div class="result-label">Sollte Teil davon sein</div>
-                    <div class="result-bar-bg"><div class="result-bar-fill" id="bar-local-mittel"></div></div>
-                    <div class="result-pct" id="pct-local-mittel">0%</div>
-                </div>
-                <div class="result-row">
-                    <div class="result-label">Gar keinen</div>
-                    <div class="result-bar-bg"><div class="result-bar-fill" id="bar-local-viel"></div></div>
-                    <div class="result-pct" id="pct-local-viel">0%</div>
-                </div>
-            </div>
-        </div>
-        <div class="vote-btn-row reveal" style="margin-top:28px;">
-            <button class="btn-primary" id="localVoteBtn" onclick="submitLocalVote()">Jetzt abstimmen</button>
-            <button class="btn-ghost" onclick="toggleLocalResults()">Ergebnisse anzeigen</button>
-        </div>
-        <div class="vote-success" id="localVoteSuccess" style="margin-top:20px;">
-            <div class="vote-success-icon">⭐</div>
-            <h4>Danke für deine Stimme!</h4>
-            <p>Deine Antwort wurde lokal gespeichert.</p>
-        </div>
-        <p class="vote-notice">🔒 Eine Stimme pro Gerät · Lokale Speicherung</p>
     </section>
 
     <!-- Footer -->
