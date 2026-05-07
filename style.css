@@ -206,7 +206,7 @@ nav {
     box-shadow: 0 6px 28px rgba(0, 155, 78, 0.5);
 }
 
-/* Hamburger-Button */
+/* ── HAMBURGER BUTTON ── */
 .nav-toggle {
     display: none;
     background: none;
@@ -215,7 +215,7 @@ nav {
     flex-direction: column;
     gap: 5px;
     padding: 6px;
-    z-index: 210;
+    z-index: 250;
 }
 .nav-toggle span {
     display: block;
@@ -225,7 +225,6 @@ nav {
     border-radius: 2px;
     transition: all 0.3s ease;
 }
-/* Hamburger-Animation zu X */
 .nav-toggle.active span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
 }
@@ -1001,9 +1000,11 @@ footer {
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex;
         border-left: 1px solid var(--border);
+        pointer-events: none;   /* ← Fix: Klicks durchlassen, wenn Menü geschlossen */
     }
     .nav-links.open {
         transform: translateX(0);
+        pointer-events: auto;   /* ← Klicks im Menü wieder erlauben */
     }
     .nav-toggle {
         display: flex;
