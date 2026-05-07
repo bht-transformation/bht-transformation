@@ -94,7 +94,6 @@ body {
     50% { transform: translate(-35px, 25px) scale(1.08); }
 }
 
-/* grid overlay */
 body::before {
     content: '';
     position: fixed;
@@ -510,6 +509,7 @@ h2.section-title {
 }
 .stat-label { font-size: 0.85rem; color: var(--text-sub); line-height: 1.5; font-weight: 400; }
 .stat-context { font-size: 0.72rem; color: var(--text-muted); margin-top: 10px; }
+.stat-source { font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; opacity: 0.8; }
 
 .quote-bar {
     margin-top: 60px;
@@ -564,7 +564,191 @@ h2.section-title {
 .tl-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
 .tl-card p { font-size: 0.87rem; color: var(--text-sub); line-height: 1.7; }
 
-/* ── VOTING ── */
+/* ── TEAM CARDS (neu für Seite 2) ── */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 60px;
+}
+.team-card {
+    padding: 32px 24px;
+    border-radius: 22px;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    text-align: center;
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+}
+.team-card:hover {
+    background: var(--glass-md);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,155,78,0.2);
+}
+.team-card .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bht-green-l), var(--teal));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 auto 1rem;
+    transition: transform 0.3s;
+}
+.team-card:hover .avatar {
+    transform: scale(1.08);
+    box-shadow: 0 8px 24px rgba(0, 155, 78, 0.3);
+}
+.team-card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+.team-card .role {
+    font-size: 0.8rem;
+    color: var(--bht-green-l);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+/* ── ICEBERG (neu) ── */
+.iceberg-container {
+    padding: 2rem;
+    margin-top: 40px;
+}
+.iceberg-instruction {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+.iceberg-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.iceberg-level {
+    width: 100%;
+    max-width: 550px;
+    padding: 1.2rem 1.8rem;
+    border-radius: 20px;
+    cursor: pointer;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s ease;
+    text-align: center;
+    opacity: 0.7;
+    transform: scale(0.96);
+}
+.iceberg-level:hover {
+    background: var(--glass-md);
+    opacity: 0.9;
+}
+.iceberg-level.revealed {
+    opacity: 1;
+    transform: scale(1);
+    border-color: var(--bht-green);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+.iceberg-level.revealed .level-detail {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+.level-detail {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    text-align: left;
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    line-height: 1.6;
+    transition: max-height 0.5s ease, opacity 0.5s ease, margin 0.3s;
+}
+.iceberg-level h4 {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+}
+.iceberg-tip {
+    cursor: default;
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(0, 180, 216, 0.1);
+    border-color: rgba(0, 180, 216, 0.3);
+}
+.iceberg-tip h4 { color: var(--teal); }
+
+/* ── QUOTE CAROUSEL (neu) ── */
+.quote-carousel {
+    position: relative;
+    padding: 3rem 2rem;
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+.quote-slide {
+    display: none;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.quote-slide.active {
+    display: flex;
+    animation: fadeUp 0.5s ease;
+}
+.quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text-sub);
+    line-height: 1.6;
+}
+.quote-author {
+    font-size: 0.85rem;
+    color: var(--bht-green-l);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.quote-nav {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+.quote-nav button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--glass);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1.2rem;
+    color: var(--text-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(12px);
+}
+.quote-nav button:hover {
+    border-color: var(--bht-green);
+    color: #fff;
+    background: var(--glass-md);
+}
+
+/* ── VOTING (allgemein) ── */
 .vote-section {
     background: rgba(5, 18, 38, 0.5);
     padding: 100px 0;
