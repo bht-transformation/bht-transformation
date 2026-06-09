@@ -18,8 +18,12 @@ const revealObserver = new IntersectionObserver((entries) => {
             e.target.classList.add('visible');
             const num = e.target.querySelector('[data-target]');
             if (num && !num.dataset.animated) {
-                num.dataset.animated = '1';
-                animateCounter(num);
+                // ✅ Nur numerische Werte animieren – verhindert NaN auf Buttons
+                const targetValue = parseInt(num.dataset.target, 10);
+                if (!isNaN(targetValue)) {
+                    num.dataset.animated = '1';
+                    animateCounter(num);
+                }
             }
             revealObserver.unobserve(e.target);
         }
