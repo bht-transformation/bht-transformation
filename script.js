@@ -18,7 +18,7 @@ const revealObserver = new IntersectionObserver((entries) => {
             e.target.classList.add('visible');
             const num = e.target.querySelector('[data-target]');
             if (num && !num.dataset.animated) {
-                // ✅ Nur numerische Werte animieren – verhindert NaN auf Buttons
+                // Nur numerische Werte animieren – verhindert NaN auf Buttons
                 const targetValue = parseInt(num.dataset.target, 10);
                 if (!isNaN(targetValue)) {
                     num.dataset.animated = '1';
@@ -81,21 +81,7 @@ if (navToggle && navLinks) {
 }
 
 // ══════════════════════════════════════════════════════
-// NEU: TOGGLE DETAILS FÜR INTERVENTIONEN
-// ══════════════════════════════════════════════════════
-document.querySelectorAll('.toggle-details').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const targetId = btn.getAttribute('data-target');
-        const detailsDiv = document.getElementById(targetId);
-        if (detailsDiv) {
-            detailsDiv.classList.toggle('open');
-            btn.textContent = detailsDiv.classList.contains('open') ? "Weniger anzeigen" : "Mehr erfahren";
-        }
-    });
-});
-
-// ══════════════════════════════════════════════════════
-// NEU: MODAL SYSTEM (Spiegel- & Stuhl-Intervention)
+// NEU: MODAL SYSTEM (Spiegel- & Stuhl-Intervention + Details)
 // ══════════════════════════════════════════════════════
 const modalOverlay = document.getElementById('modalOverlay');
 const modalContentDiv = document.getElementById('modalContent');
@@ -168,3 +154,22 @@ if (openStuhlBtn) {
         }
     });
 }
+
+// ══════════════════════════════════════════════════════
+// NEU: TOGGLE DETAILS ALS MODAL (statt Ausklappen)
+// ══════════════════════════════════════════════════════
+document.querySelectorAll('.toggle-details').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const targetId = btn.getAttribute('data-target');
+        const detailsDiv = document.getElementById(targetId);
+        if (detailsDiv) {
+            // Inhalt des Divs in ein Modal packen
+            const contentHtml = detailsDiv.innerHTML;
+            showModal(`
+                <div style="max-height: 70vh; overflow-y: auto;">
+                    ${contentHtml}
+                </div>
+            `);
+        }
+    });
+});
