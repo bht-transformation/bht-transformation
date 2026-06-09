@@ -1373,3 +1373,197 @@ footer {
     .hero h1 { font-size: 2.4rem; }
     .team-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ===== NEUE ERWEITERUNGEN FÜR INTERVENTIONEN ===== */
+
+.intervention-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.intervention-card {
+    background: var(--glass-md);
+    backdrop-filter: blur(24px);
+    border-radius: 28px;
+    padding: 1.8rem;
+    border: 1px solid var(--border);
+    transition: transform 0.25s ease, box-shadow 0.3s;
+}
+
+.intervention-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+    border-color: rgba(15, 137, 203, 0.4);
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 0.8rem;
+}
+
+.tag {
+    background: rgba(15, 137, 203, 0.18);
+    backdrop-filter: blur(4px);
+    padding: 0.2rem 0.9rem;
+    border-radius: 60px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: lowercase;
+    border: 0.5px solid rgba(136, 193, 216, 0.3);
+    color: var(--bht-blue-pale);
+}
+
+.tag::before {
+    content: "#";
+    opacity: 0.8;
+    margin-right: 0.2rem;
+}
+
+.btn-outline-card {
+    background: transparent;
+    border: 1px solid var(--bht-blue-l);
+    padding: 0.45rem 1.2rem;
+    border-radius: 60px;
+    font-family: 'Futura', 'Century Gothic', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 1rem;
+    color: var(--bht-blue-pale);
+}
+
+.btn-outline-card:hover {
+    background: var(--bht-blue-l);
+    color: #fff;
+    border-color: var(--bht-blue-l);
+}
+
+.card-details {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: none;
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    line-height: 1.65;
+}
+
+.card-details.open {
+    display: block;
+    animation: fadeUp 0.4s ease;
+}
+
+.image-placeholder {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 20px;
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 1.2rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border: 1px dashed var(--bht-blue-l);
+    text-align: center;
+    padding: 1rem;
+    font-weight: 500;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(1, 13, 30, 0.9);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-container {
+    background: rgba(5, 30, 55, 0.95);
+    backdrop-filter: blur(28px);
+    max-width: 550px;
+    width: 90%;
+    border-radius: 32px;
+    padding: 2rem;
+    border: 1px solid var(--border-primary);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem; right: 1.2rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: 0.2s;
+}
+
+.modal-close:hover { color: #fff; }
+
+.vote-radio-group {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem;
+    border-radius: 20px;
+    margin: 1rem 0;
+}
+
+.vote-radio-group label {
+    display: block;
+    margin: 0.5rem 0;
+}
+
+.btn-modal-submit {
+    background: var(--bht-blue);
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 60px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-modal-submit:hover {
+    background: var(--bht-blue-l);
+    transform: scale(1.02);
+}
+
+.extra-spuren {
+    background: var(--glass);
+    border-radius: 28px;
+    padding: 2rem;
+    margin-top: 2rem;
+    border: 1px solid var(--border);
+}
+
+/* Anpassung hero-cards, falls nicht vorhanden */
+.hero-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 40px 0 20px;
+}
+.hero-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    padding: 16px 24px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    min-width: 140px;
+}
+.hero-card-icon { font-size: 1.8rem; margin-bottom: 6px; }
+.hero-card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; color: var(--bht-blue-l); text-transform: uppercase; }
+.hero-card-text { font-size: 0.85rem; font-weight: 500; margin-top: 6px; }
