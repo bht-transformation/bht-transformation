@@ -1699,6 +1699,27 @@ footer {
     padding: 1rem;
     font-weight: 500;
     font-family: 'Open Sans', sans-serif;
+
+    /* ── NEU ── */
+    overflow: hidden;       /* verhindert, dass img über den Rand läuft   */
+    width: 100%;            /* füllt immer die verfügbare Breite           */
+    box-sizing: border-box;
+}
+
+/* Wenn ein echtes Bild drin ist: kein Padding, kein min-height */
+.image-placeholder:has(img) {
+    padding: 0;
+    min-height: unset;
+}
+
+/* Das Bild selbst */
+.image-placeholder img {
+    display: block;
+    width: 100%;          /* immer volle Breite des Containers            */
+    height: auto;         /* Höhe proportional → kein Strecken            */
+    max-height: 320px;    /* Deckel für sehr hochformatige Bilder          */
+    object-fit: cover;    /* füllt den Rahmen, schneidet sauber ab         */
+    border-radius: 18px;  /* 2 px weniger als Parent → kein sichtbarer Gap */
 }
 
 .modal-overlay {
